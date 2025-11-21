@@ -11,6 +11,25 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Main from './src/screens/Main.js'
+import { DisplayWeather } from './src/screens/DisplayWeather.js'
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerTitle: '',
+      headerTransparent: true
+    }}>
+      <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen name="Weather" component={DisplayWeather} />
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -18,21 +37,10 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
     </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
   );
 }
 
