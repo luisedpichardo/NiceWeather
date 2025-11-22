@@ -1,21 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native'
 
-import { DayInfoDisplay } from './DayInfoDisplay.js'
-import { WeekInfoDisplay } from './WeekInfoDisplay.js'
-
-export const TempInfoDisplay = () => {
+export const WeekInfoDisplay = () => {
   return (
-    <View style={styles.tempInfo}>
-      <DayInfoDisplay />
-      <WeekInfoDisplay />
+    <View style={styles.weekInfo}>
+      <View style={styles.dayPrev}>
+        <Text>Monday</Text>
+      </View>
+
+      <View style={styles.dayPrev}>
+        <Text>Tuesday</Text>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  tempInfo: {
-    flex: 30,
-  },
   weekInfo: {
     flex: 7,
     backgroundColor: 'aliceblue',
