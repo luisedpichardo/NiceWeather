@@ -1,4 +1,6 @@
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Image, Button } from 'react-native'
+
+import { CityInput } from './CityInput.js'
 
 export const SearchBar = () => {
   return (
@@ -8,26 +10,27 @@ export const SearchBar = () => {
 					source={require('../../assets/search.png')}
 					style={styles.imgStyle}/>
       </View>
-      <TextInput placeholder="Add City" />
+      <CityInput />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   inputStyle: {
-    flex: 1,
+    // flex: 1,
     borderRadius: 20,
-    paddingLeft: 10,
-    fontSize: 12,
-    fontStyle: 'italic',
-    color: 'white',
+    // paddingLeft: 10,
+    // fontSize: 12,
+    // fontStyle: 'italic',
+    // color: 'white',
     backgroundColor: 'gray',
     flexDirection: 'row',
     alignItems: 'center',
     margin: 20,
   },
 	imgStyle: {
-		width: 20,
-		height: 20
-	}
+		width: 18,
+		height: 18,
+    margin: 10
+	},
 })

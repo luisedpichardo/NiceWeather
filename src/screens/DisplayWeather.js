@@ -1,18 +1,59 @@
-import { View, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Alert } from 'react-native'
+import { useEffect, useState } from 'react'
 
+import Config from '../../config.local.js'
 import { AddRemoveCityBtn } from '../components/AddRemoveCityBtn.js'
 import { TemperatureHdr } from '../components/TemperatureHdr.js'
 import { TempInfoDisplay } from '../components/TempInfoDisplay.js'
 
-export const DisplayWeather = () => {
+export const DisplayWeather = ({ route }) => {
+  const [loader, setLoader] = useState(true)
+  const [forecastData, setForecastData] = useState(null)
+
+  const getForecastByName = () => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.name}&appid=${Config.API_WORK_KEY}&units=imperial`,
+    )
+      .then(response => {
+        // Parse to json
+        return response.json()
+      })
+      .then(json => {
+        if (json.cod === '200') {
+          setForecastData(json)
+          setLoader(false)
+          console.log('read data')
+          return
+        }
+        // Other wise throw an error
+        throw Error(json.message)
+      })
+      .catch(error => {
+        Alert.alert(error.message)
+      })
+  }
+
+  useEffect(() => {
+    // console.log(route.params.name)
+    console.log('loading')
+    getForecastByName()
+  }, [])
+
   return (
-    <View style={styles.container}>
-			<AddRemoveCityBtn />
+    <View>
+      {loader ? (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <AddRemoveCityBtn inList={route.params.formList} />
 
-			<TemperatureHdr />
+          <TemperatureHdr infoPerHrList={forecastData.list} />
 
-			<TempInfoDisplay />
-
+          <TempInfoDisplay />
+        </View>
+      )}
     </View>
   )
 }

@@ -2,6 +2,9 @@
 #
 .DS_Store
 
+# Local Variables
+config.local.js
+
 # Xcode
 #
 build/

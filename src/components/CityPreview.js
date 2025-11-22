@@ -1,13 +1,21 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
-export const CityPreview = ({city, state}) => {
+
+export const CityPreview = ({el}) => {
+  const navigation = useNavigation()
+
+  const openCityScreen = (el) => {
+    navigation.navigate('Weather', { formList: true, ...el })
+  }
+
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.cardStyle}
-      onPress={console.log(`city: ${city}, state: ${state}`)}
+      onPress={() => openCityScreen(el)}
       >
       <View style={styles.cardTopElem}>
-        <Text>{city}, {state}</Text>
+        <Text>{el.city}, {el.country}</Text>
         <Text>Temp</Text>
       </View>
       <View style={styles.cardTopElem}>

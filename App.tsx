@@ -25,8 +25,8 @@ function MyStack() {
       headerTitle: '',
       headerTransparent: true
     }}>
-      <Stack.Screen name="Weather" component={DisplayWeather} />
       <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen name="Weather" component={DisplayWeather} />
     </Stack.Navigator>
   );
 }
