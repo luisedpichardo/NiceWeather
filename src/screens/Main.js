@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 
 import { cityList } from '../stores/store-cityList.js'
 import { SearchBar } from '../components/SearchBar.js'
@@ -32,11 +32,13 @@ class Main extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
         <SearchBar citiesList={this.state.cities} />
-        <View style={styles.citiesCont}>
-          {this.state.cities.map((el, i) => {
-            return <CityPreview key={i} el={el} />
-          })}
-        </View>
+        <ScrollView style={{ flex: 1 }}>
+          <View>
+            {this.state.cities.map((el, i) => {
+              return <CityPreview key={i} el={el} />
+            })}
+          </View>
+        </ScrollView>
       </View>
     )
   }
@@ -49,16 +51,12 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   titleStyle: {
-    flex: 1,
     paddingTop: 70,
     paddingLeft: 30,
     paddingBottom: 10,
     fontSize: 40,
     fontWeight: '600',
     color: 'white',
-  },
-  citiesCont: {
-    flex: 15,
   },
 })
 

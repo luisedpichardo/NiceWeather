@@ -20,7 +20,6 @@ export const TemperatureHdr = ({ weatherInfo }) => {
 
 const styles = StyleSheet.create({
   cityCont: {
-    flex: 9,
     alignItems: 'center',
     margin: 10,
     padding: 10,

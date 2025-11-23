@@ -12,6 +12,6 @@ export const TempInfoDisplay = ({ infoPerHrList }) => {
 
 const styles = StyleSheet.create({
   tempInfo: {
-    flex: 30,
+    // flex: 30,
   },
 })

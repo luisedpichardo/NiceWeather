@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 export const RemoveCity = ({ cityData }) => {
   // const navigation = useNavigation()
-  console.log('before removing')
+  console.log('before removing', cityData)
   // const removeCityfromList = () => {
   //   let city = {
   //     city: cityData.cityData.name,

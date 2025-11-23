@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 
 import { cityList } from '../stores/store-cityList.js'
 import { useNavigation } from '@react-navigation/native'
@@ -16,8 +16,8 @@ export const AddCity = ({ cityData }) => {
   }
 
   return (
-      <TouchableOpacity onPress={() => addCityToList()}>
-        <Text>Add To List</Text>
-      </TouchableOpacity>
+    <TouchableOpacity onPress={() => addCityToList()}>
+      <Text>Add To List</Text>
+    </TouchableOpacity>
   )
 }

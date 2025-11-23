@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native'
 import { useEffect, useState } from 'react'
 
 import Config from '../../config.local.js'
@@ -47,15 +47,16 @@ export const DisplayWeather = ({ route }) => {
         <View style={styles.infoContainer}>
           <View style={styles.addRemStyle}>
             {route.params.fromList ? (
-              <RemoveCity />
+              <RemoveCity cityData={route.params} />
             ) : (
               <AddCity cityData={route.params} />
             )}
           </View>
 
-          <TemperatureHdr weatherInfo={route.params.cityData} />
-
+          <TemperatureHdr style={{felx:9}} weatherInfo={route.params.cityData} />
+            <ScrollView style={{flex:30}}>
           <TempInfoDisplay infoPerHrList={forecastData.list} />
+            </ScrollView>
         </View>
       )}
     </View>
@@ -74,8 +75,6 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   addRemStyle: {
-    flex: 1,
-    backgroundColor: 'white',
     padding: 5,
     alignItems: 'flex-end',
     margin: 5,
