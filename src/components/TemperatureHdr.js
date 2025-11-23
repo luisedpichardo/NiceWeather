@@ -1,12 +1,19 @@
 import { View, Text, StyleSheet } from 'react-native'
 
-export const TemperatureHdr = () => {
+export const TemperatureHdr = ({ weatherInfo }) => {
   return (
     <View style={styles.cityCont}>
-      <Text style={styles.cityName}>City</Text>
-      <Text style={styles.cityTemp}>Temp</Text>
-      <Text style={styles.cityHighLow}>High/Low Temp</Text>
-      <Text style={styles.cityHighLow}>Sunny</Text>
+      <Text style={styles.cityName}>{weatherInfo.name}</Text>
+      <Text style={styles.cityTemp}>{weatherInfo.main.temp}°</Text>
+      <Text style={styles.cityHighLow}>
+        {weatherInfo.weather[0].description}
+      </Text>
+      <Text style={styles.cityHighLow}>
+        Feels like: {weatherInfo.main.feels_like}°
+      </Text>
+      <Text style={styles.cityHighLow}>
+        High: {weatherInfo.main.temp_max}° Low: {weatherInfo.main.temp_min}°
+      </Text>
     </View>
   )
 }
@@ -14,14 +21,13 @@ export const TemperatureHdr = () => {
 const styles = StyleSheet.create({
   cityCont: {
     flex: 9,
-    backgroundColor: 'blue',
     alignItems: 'center',
     margin: 10,
-    padding: 5,
+    padding: 10,
   },
   cityName: {
     color: 'white',
-    fontSize: 30,
+    fontSize: 20,
   },
   cityTemp: {
     color: 'white',

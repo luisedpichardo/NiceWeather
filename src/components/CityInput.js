@@ -27,7 +27,7 @@ export const CityInput = () => {
       .then(json => {
         // Check if success
         if (json.cod === 200) {
-          navigation.navigate('Weather', json)
+          navigation.navigate('Weather', { fromList: false, ...json })
           return
         }
         // Other wise throw an error

@@ -2,9 +2,10 @@ import { View, Text, StyleSheet, Alert } from 'react-native'
 import { useEffect, useState } from 'react'
 
 import Config from '../../config.local.js'
-import { AddRemoveCityBtn } from '../components/AddRemoveCityBtn.js'
 import { TemperatureHdr } from '../components/TemperatureHdr.js'
 import { TempInfoDisplay } from '../components/TempInfoDisplay.js'
+import { AddCity } from '../components/AddCity.js'
+import { RemoveCity } from '../components/RemoveCity.js'
 
 export const DisplayWeather = ({ route }) => {
   const [loader, setLoader] = useState(true)
@@ -34,6 +35,7 @@ export const DisplayWeather = ({ route }) => {
   }
 
   useEffect(() => {
+    console.log(route.params.name)
     getForecastByName()
   }, [])
 
@@ -44,12 +46,17 @@ export const DisplayWeather = ({ route }) => {
           <Text>Loading...</Text>
         </View>
       ) : (
-        <View style={styles.infoContainer} >
-          <AddRemoveCityBtn inList={route.params.formList} />
+        <View style={styles.infoContainer}>
+          <View style={styles.addRemStyle}>
+            {route.params.fromList ? <RemoveCity /> : <AddCity />}
+          </View>
 
-          <TemperatureHdr infoPerHrList={forecastData.list} />
+          <TemperatureHdr weatherInfo={route.params} />
 
-          <TempInfoDisplay />
+          <TempInfoDisplay
+            infoPerHrList={forecastData.list}
+            infoPerDayList={{}}
+          />
         </View>
       )}
     </View>
@@ -66,5 +73,11 @@ const styles = StyleSheet.create({
     paddingTop: 70,
     padding: 30,
     paddingBottom: 50,
+  },
+  addRemStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 10,
+    alignItems: 'flex-end',
   },
 })
