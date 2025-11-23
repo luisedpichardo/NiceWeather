@@ -1,11 +1,10 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-
-export const CityPreview = ({el}) => {
+export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
 
-  const openCityScreen = (el) => {
+  const openCityScreen = el => {
     navigation.navigate('Weather', { formList: true, ...el })
   }
 
@@ -13,12 +12,14 @@ export const CityPreview = ({el}) => {
     <TouchableOpacity
       style={styles.cardStyle}
       onPress={() => openCityScreen(el)}
-      >
-      <View style={styles.cardTopElem}>
-        <Text>{el.city}, {el.country}</Text>
+    >
+      <View style={styles.cardElem}>
+        <Text>
+          {el.city}, {el.country}
+        </Text>
         <Text>Temp</Text>
       </View>
-      <View style={styles.cardTopElem}>
+      <View style={styles.cardElem}>
         <Text>Weather</Text>
         <Text>high low</Text>
       </View>
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     padding: 30,
     borderRadius: 25,
   },
-  cardTopElem: {
+  cardElem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

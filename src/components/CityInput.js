@@ -1,32 +1,41 @@
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from 'react-native'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 import Config from '../../config.local.js'
-
 
 export const CityInput = () => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
 
   const lookCity = () => {
-    console.log(Config)
+    console.log('request to weather')
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Config.API_WORK_KEY}&units=imperial`,
-    ).then(response => {
-      // Parse to json
-      return response.json()
-    }).then(json => {
-      // Check if success
-      if (json.cod === 200) {
-        navigation.navigate('Weather', json)
-        return
-      }
-      // Other wise throw an error
-      throw Error(json.message)
-    }).catch(error => {
-      Alert.alert(error.message)
-    })
+    )
+      .then(response => {
+        // Parse to json
+        return response.json()
+      })
+      .then(json => {
+        // Check if success
+        if (json.cod === 200) {
+          navigation.navigate('Weather', json)
+          return
+        }
+        // Other wise throw an error
+        throw Error(json.message)
+      })
+      .catch(error => {
+        Alert.alert(error.message)
+      })
   }
 
   return (
@@ -40,7 +49,7 @@ export const CityInput = () => {
       />
       <TouchableOpacity
         title="Submit"
-        onPress={() => lookCity(city) }
+        onPress={() => lookCity(city)}
         style={styles.btn}
       >
         <Text>Search</Text>

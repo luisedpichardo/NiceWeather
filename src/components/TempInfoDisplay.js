@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import { DayInfoDisplay } from './DayInfoDisplay.js'
 import { WeekInfoDisplay } from './WeekInfoDisplay.js'
@@ -15,17 +15,5 @@ export const TempInfoDisplay = () => {
 const styles = StyleSheet.create({
   tempInfo: {
     flex: 30,
-  },
-  weekInfo: {
-    flex: 7,
-    backgroundColor: 'aliceblue',
-    padding: 10,
-    borderRadius: 10,
-  },
-  dayPrev: {
-    borderWidth: 1,
-    borderColor: 'red',
-    margin: 5,
-    padding: 5,
   },
 })

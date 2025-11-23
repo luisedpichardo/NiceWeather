@@ -11,6 +11,7 @@ export const DisplayWeather = ({ route }) => {
   const [forecastData, setForecastData] = useState(null)
 
   const getForecastByName = () => {
+    console.log('request to forecast')
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.name}&appid=${Config.API_WORK_KEY}&units=imperial`,
     )
@@ -22,7 +23,6 @@ export const DisplayWeather = ({ route }) => {
         if (json.cod === '200') {
           setForecastData(json)
           setLoader(false)
-          console.log('read data')
           return
         }
         // Other wise throw an error
@@ -34,19 +34,17 @@ export const DisplayWeather = ({ route }) => {
   }
 
   useEffect(() => {
-    // console.log(route.params.name)
-    console.log('loading')
     getForecastByName()
   }, [])
 
   return (
-    <View>
+    <View style={styles.container}>
       {loader ? (
         <View>
           <Text>Loading...</Text>
         </View>
       ) : (
-        <View style={styles.container}>
+        <View style={styles.infoContainer} >
           <AddRemoveCityBtn inList={route.params.formList} />
 
           <TemperatureHdr infoPerHrList={forecastData.list} />
@@ -61,38 +59,12 @@ export const DisplayWeather = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  infoContainer: {
+    flex: 1,
     backgroundColor: 'lightblue',
     paddingTop: 70,
     padding: 30,
     paddingBottom: 50,
-  },
-  tempInfo: {
-    flex: 45,
-  },
-  dayInfo: {
-    flex: 1,
-    backgroundColor: 'aliceblue',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    flexDirection: 'row',
-  },
-  weekInfo: {
-    flex: 7,
-    backgroundColor: 'aliceblue',
-    padding: 10,
-    borderRadius: 10,
-  },
-  hrInfo: {
-    borderWidth: 1,
-    borderColor: 'red',
-    margin: 5,
-    padding: 5,
-  },
-  dayPrev: {
-    borderWidth: 1,
-    borderColor: 'red',
-    margin: 5,
-    padding: 5,
   },
 })

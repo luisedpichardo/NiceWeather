@@ -5,7 +5,6 @@ import { HrInfoDisplay } from './HrInfoDisplay.js'
 export const DayInfoDisplay = () => {
   return (
     <View style={styles.dayInfo}>
-
       <HrInfoDisplay />
       <HrInfoDisplay />
     </View>
