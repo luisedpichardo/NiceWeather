@@ -1,18 +1,30 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
+import { cityList } from '../stores/store-cityList.js'
 import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
 
 class Main extends React.Component {
+  unsubscribe = null
   constructor() {
     super()
     this.state = {
-      cities: [
-        { city: 'el paso', country: 'usa' },
-        { city: 'atlanta', country: 'usa' },
-        { city: 'miami', country: 'usa' },
-      ],
+      cities: cityList.getState().cities,
+    }
+    console.log(this.state)
+  }
+
+  componentDidMount() {
+    // subscribe to store changes
+    this.unsubscribe = cityList.subscribe(newState => {
+      this.setState({ cities: newState.cities })
+    })
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe()
     }
   }
 
@@ -20,7 +32,7 @@ class Main extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
-        <SearchBar />
+        <SearchBar citiesList={this.state.cities} />
         <View style={styles.citiesCont}>
           {this.state.cities.map((el, i) => {
             return <CityPreview key={i} el={el} />

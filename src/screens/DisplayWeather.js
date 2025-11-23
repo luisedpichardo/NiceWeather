@@ -12,9 +12,8 @@ export const DisplayWeather = ({ route }) => {
   const [forecastData, setForecastData] = useState(null)
 
   const getForecastByName = () => {
-    console.log('request to forecast')
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.name}&appid=${Config.API_WORK_KEY}&units=imperial`,
+      `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.cityData.name}&appid=${Config.API_WORK_KEY}&units=imperial`,
     )
       .then(response => {
         // Parse to json
@@ -35,7 +34,6 @@ export const DisplayWeather = ({ route }) => {
   }
 
   useEffect(() => {
-    console.log(route.params.name)
     getForecastByName()
   }, [])
 
@@ -48,15 +46,16 @@ export const DisplayWeather = ({ route }) => {
       ) : (
         <View style={styles.infoContainer}>
           <View style={styles.addRemStyle}>
-            {route.params.fromList ? <RemoveCity /> : <AddCity />}
+            {route.params.fromList ? (
+              <RemoveCity />
+            ) : (
+              <AddCity cityData={route.params} />
+            )}
           </View>
 
-          <TemperatureHdr weatherInfo={route.params} />
+          <TemperatureHdr weatherInfo={route.params.cityData} />
 
-          <TempInfoDisplay
-            infoPerHrList={forecastData.list}
-            infoPerDayList={{}}
-          />
+          <TempInfoDisplay infoPerHrList={forecastData.list} />
         </View>
       )}
     </View>

@@ -11,12 +11,11 @@ import { useNavigation } from '@react-navigation/native'
 
 import Config from '../../config.local.js'
 
-export const CityInput = () => {
+export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
 
   const lookCity = () => {
-    console.log('request to weather')
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Config.API_WORK_KEY}&units=imperial`,
     )
@@ -27,7 +26,11 @@ export const CityInput = () => {
       .then(json => {
         // Check if success
         if (json.cod === 200) {
-          navigation.navigate('Weather', { fromList: false, ...json })
+          navigation.navigate('Weather', {
+            fromList: false,
+            cityData: { ...json },
+            citiesList: citiesList,
+          })
           return
         }
         // Other wise throw an error
