@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
   addRemStyle: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 10,
+    padding: 5,
     alignItems: 'flex-end',
+    margin: 5,
   },
 })

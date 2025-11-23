@@ -8,13 +8,13 @@ export const HrInfoDisplay = ({ hr }) => {
       <View style={styles.tempInfo}>
         <Text>{hr.dt_txt}</Text>
         <Text>
-          Max: {hr.main.temp_max} Low: {hr.main.temp_min}
+          Max: {hr.main.temp_max}° Low: {hr.main.temp_min}°
         </Text>
         <Text>{hr.weather[0].main}</Text>
         <Text>Humidity {hr.main.humidity}%</Text>
       </View>
       <View style={styles.icon}>
-        <Text>{hr.main.temp}</Text>
+        <Text>{hr.main.temp}°</Text>
         <WeatherIcon icon={hr.weather[0].icon} />
       </View>
     </View>

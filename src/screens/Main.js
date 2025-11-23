@@ -12,7 +12,6 @@ class Main extends React.Component {
     this.state = {
       cities: cityList.getState().cities,
     }
-    console.log(this.state)
   }
 
   componentDidMount() {
