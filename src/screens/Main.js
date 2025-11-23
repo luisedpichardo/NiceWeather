@@ -34,8 +34,8 @@ class Main extends React.Component {
         <SearchBar citiesList={this.state.cities} />
         <ScrollView style={{ flex: 1 }}>
           <View>
-            {this.state.cities.map((el, i) => {
-              return <CityPreview key={i} el={el} />
+            {this.state.cities.map( el => {
+              return <CityPreview key={`${el.city}-${el.country}`} el={el} />
             })}
           </View>
         </ScrollView>
