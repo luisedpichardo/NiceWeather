@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { cityList } from '../stores/store-cityList.js'
@@ -6,7 +6,7 @@ import { cityList } from '../stores/store-cityList.js'
 export const RemoveCity = ({ cityData }) => {
   const navigation = useNavigation()
   const removeCityfromList = () => {
-      let city = {
+    let city = {
       city: cityData.cityData.name,
       country: cityData.cityData.sys.country,
       fromList: true,
@@ -17,8 +17,8 @@ export const RemoveCity = ({ cityData }) => {
   }
 
   return (
-      <TouchableOpacity onPress={() => removeCityfromList()}>
-        <Text>Remove</Text>
-      </TouchableOpacity>
+    <TouchableOpacity onPress={() => removeCityfromList()}>
+      <Text>Remove</Text>
+    </TouchableOpacity>
   )
 }

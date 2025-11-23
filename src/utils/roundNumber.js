@@ -1,4 +1,4 @@
 
-export const roundNumber = (num) => {
-    return Math.round(num)
+export const roundNumber = num => {
+  return Math.round(num)
 }
