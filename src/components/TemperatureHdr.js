@@ -1,18 +1,21 @@
 import { View, Text, StyleSheet } from 'react-native'
 
+import { roundNumber } from '../utils/roundNumber'
+
 export const TemperatureHdr = ({ weatherInfo }) => {
   return (
     <View style={styles.cityCont}>
       <Text style={styles.cityName}>{weatherInfo.name}</Text>
-      <Text style={styles.cityTemp}>{weatherInfo.main.temp}°</Text>
+      <Text style={styles.cityTemp}>{roundNumber(weatherInfo.main.temp)}°</Text>
       <Text style={styles.cityHighLow}>
         {weatherInfo.weather[0].description}
       </Text>
       <Text style={styles.cityHighLow}>
-        Feels like: {weatherInfo.main.feels_like}°
+        Feels like: {roundNumber(weatherInfo.main.feels_like)}°
       </Text>
       <Text style={styles.cityHighLow}>
-        High: {weatherInfo.main.temp_max}° Low: {weatherInfo.main.temp_min}°
+        High: {roundNumber(weatherInfo.main.temp_max)}° Low:{' '}
+        {roundNumber(weatherInfo.main.temp_min)}°
       </Text>
     </View>
   )

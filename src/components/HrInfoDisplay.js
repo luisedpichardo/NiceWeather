@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 
 import { WeatherIcon } from './WeatherIcon.js'
+import { roundNumber } from '../utils/roundNumber.js'
 
 export const HrInfoDisplay = ({ hr }) => {
   return (
@@ -8,13 +9,14 @@ export const HrInfoDisplay = ({ hr }) => {
       <View style={styles.tempInfo}>
         <Text>{hr.dt_txt}</Text>
         <Text>
-          Max: {hr.main.temp_max}° Low: {hr.main.temp_min}°
+          Max: {roundNumber(hr.main.temp_max)}° Low:{' '}
+          {roundNumber(hr.main.temp_min)}°
         </Text>
         <Text>{hr.weather[0].main}</Text>
         <Text>Humidity {hr.main.humidity}%</Text>
       </View>
       <View style={styles.icon}>
-        <Text>{hr.main.temp}°</Text>
+        <Text>{roundNumber(hr.main.temp)}°</Text>
         <WeatherIcon icon={hr.weather[0].icon} />
       </View>
     </View>

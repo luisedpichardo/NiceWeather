@@ -53,10 +53,13 @@ export const DisplayWeather = ({ route }) => {
             )}
           </View>
 
-          <TemperatureHdr style={{felx:9}} weatherInfo={route.params.cityData} />
-            <ScrollView style={{flex:30}}>
-          <TempInfoDisplay infoPerHrList={forecastData.list} />
-            </ScrollView>
+          <TemperatureHdr
+            style={{ felx: 9 }}
+            weatherInfo={route.params.cityData}
+          />
+          <ScrollView style={{ flex: 30 }}>
+            <TempInfoDisplay infoPerHrList={forecastData.list} />
+          </ScrollView>
         </View>
       )}
     </View>

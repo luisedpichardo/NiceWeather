@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Config from '../../config.local.js'
 import { WeatherIcon } from './WeatherIcon'
+import { roundNumber } from '../utils/roundNumber.js'
 
 export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
@@ -41,7 +42,7 @@ export const CityPreview = ({ el }) => {
     let payload = {
       citiesList: [],
       cityData: cityInfo,
-      fromList: el.fromList
+      fromList: el.fromList,
     }
     navigation.navigate('Weather', payload)
   }
@@ -61,11 +62,14 @@ export const CityPreview = ({ el }) => {
             <Text>
               {el.city}, {el.country}
             </Text>
-            <Text>{cityInfo.main.temp}°</Text>
+            <Text>{roundNumber(cityInfo.main.temp)}°</Text>
           </View>
           <View style={styles.cardElem}>
-            <WeatherIcon icon={cityInfo.weather[0].icon}/>
-            <Text>High: {cityInfo.main.temp_max}° Low: {cityInfo.main.temp_min}°</Text>
+            <WeatherIcon icon={cityInfo.weather[0].icon} />
+            <Text>
+              High: {roundNumber(cityInfo.main.temp_max)}° Low:{' '}
+              {roundNumber(cityInfo.main.temp_min)}°
+            </Text>
           </View>
         </TouchableOpacity>
       )}
