@@ -1,13 +1,13 @@
 import { View, StyleSheet } from 'react-native'
 
 import { DayInfoDisplay } from './DayInfoDisplay.js'
-import { WeekInfoDisplay } from './WeekInfoDisplay.js'
 
-export const TempInfoDisplay = () => {
+export const TempInfoDisplay = ({ infoPerHrList, infoPerDayList }) => {
+  console.log('hrs', infoPerHrList)
+  console.log('days', infoPerDayList)
   return (
     <View style={styles.tempInfo}>
-      <DayInfoDisplay />
-      <WeekInfoDisplay />
+      <DayInfoDisplay infoPerHrList={infoPerHrList} />
     </View>
   )
 }

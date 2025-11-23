@@ -1,19 +1,43 @@
 import { View, Text, StyleSheet } from 'react-native'
 
-export const HrInfoDisplay = () => {
+import { WeatherIcon } from './WeatherIcon.js'
+
+export const HrInfoDisplay = ({ hr }) => {
   return (
     <View style={styles.hrInfo}>
-      <Text>Time</Text>
-      <Text>Temp</Text>
+      <View style={styles.tempInfo}>
+        <Text>{hr.dt_txt}</Text>
+        <Text>
+          Max: {hr.main.temp_max} Low: {hr.main.temp_min}
+        </Text>
+        <Text>{hr.weather[0].main}</Text>
+        <Text>Humidity {hr.main.humidity}%</Text>
+      </View>
+      <View style={styles.icon}>
+        <Text>{hr.main.temp}</Text>
+        <WeatherIcon icon={hr.weather[0].icon} />
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   hrInfo: {
-    borderWidth: 1,
-    borderColor: 'red',
+    backgroundColor: 'aliceblue',
     margin: 5,
+    marginBottom: 10,
     padding: 5,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    borderRadius: 10,
+  },
+  tempInfo: {
+    flex: 3,
+  },
+  icon: {
+    flex: 1,
+    paddingRight: 5,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
 })

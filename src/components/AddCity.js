@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 export const AddCity = () => {
   return (
     <View>
-      <Text>Add</Text>
+      <TouchableOpacity>
+        <Text>Add</Text>
+      </TouchableOpacity>
     </View>
   )
 }
