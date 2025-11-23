@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { cityList } from '../stores/store-cityList.js'
-import { useNavigation } from '@react-navigation/native'
 
 export const AddCity = ({ cityData }) => {
   const navigation = useNavigation()
