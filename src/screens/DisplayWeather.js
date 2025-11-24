@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -58,14 +58,14 @@ export const DisplayWeather = ({ route }) => {
         <Loading />
       ) : (
         <BackgroundWeather icon={route.params.cityData.weather[0].icon}>
-          <View style={styles.infoContainer}>
-            <TemperatureHdr
-              style={{ felx: 9 }}
-              weatherInfo={route.params.cityData}
+            <View style={styles.infoContainer}>
+              <TemperatureHdr
+                style={{ felx: 9 }}
+                weatherInfo={route.params.cityData}
               />
-            <ScrollView style={{ flex: 30 }}>
-              <TempInfoDisplay infoPerHrList={forecastData.list} />
-            </ScrollView>
+              <ScrollView style={{ flex: 30 }}>
+                <TempInfoDisplay infoPerHrList={forecastData.list} />
+              </ScrollView>
           </View>
         </BackgroundWeather>
       )}
@@ -76,6 +76,7 @@ export const DisplayWeather = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
   },
   infoContainer: {
     flex: 1,
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   addRemStyle: {
-    backgroundColor: 'aliceblue',
     padding: 5,
     alignSelf: 'flex-end',
     margin: 5,

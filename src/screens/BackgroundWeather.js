@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 
-export const BackgroundWeather = ({ icon, children }) => {
+export const BackgroundWeather = ({ icon, children, style }) => {
   const [bgWeather, setBgWeather] = useState(['#fff', '#fff'])
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const BackgroundWeather = ({ icon, children }) => {
   }
 
   return (
-    <LinearGradient style={{ flex: 1 }} colors={bgWeather}>
+    <LinearGradient style={{ flex: 1, ...style }} colors={bgWeather}>
       {children}
     </LinearGradient>
   )

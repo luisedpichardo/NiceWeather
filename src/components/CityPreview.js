@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Config from '../../config.local.js'
 import { WeatherIcon } from './WeatherIcon'
 import { Loading } from './Loading.js'
+import { BackgroundWeather } from '../screens/BackgroundWeather.js'
 import { roundNumber } from '../utils/roundNumber.js'
 
 export const CityPreview = ({ el }) => {
@@ -51,27 +52,32 @@ export const CityPreview = ({ el }) => {
   return (
     <View>
       {loader ? (
-        <Loading style={styles.cardStyle}/>
+        <Loading />
       ) : (
-        <TouchableOpacity
-          style={styles.cardStyle}
-          onPress={() => openCityScreen(el)}
-        >
-          <View style={styles.cardElem}>
-            <Text style={{ fontSize: 20 }}>
-              {el.city}, {el.country}
-            </Text>
-            <WeatherIcon icon={cityInfo.weather[0].icon} />
-          </View>
-          <View style={styles.cardElem}>
-            <Text style={{ alignSelf: 'flex-end', fontSize: 25 }}>
-              {roundNumber(cityInfo.main.temp)}°
-            </Text>
-            <Text>
-              High: {roundNumber(cityInfo.main.temp_max)}° Low:{' '}
-              {roundNumber(cityInfo.main.temp_min)}°
-            </Text>
-          </View>
+        <TouchableOpacity onPress={() => openCityScreen(el)}>
+          <BackgroundWeather
+            icon={cityInfo.weather[0].icon}
+            style={styles.inWeather}
+          >
+            <View style={styles.inWeather}>
+              <View style={styles.cardElem}>
+                <Text style={{ fontSize: 20 }}>
+                  {el.city}, {el.country}
+                </Text>
+                <WeatherIcon icon={cityInfo.weather[0].icon} />
+              </View>
+
+              <View style={styles.cardElem}>
+                <Text style={{ alignSelf: 'flex-end', fontSize: 25 }}>
+                  {roundNumber(cityInfo.main.temp)}°
+                </Text>
+                <Text>
+                  High: {roundNumber(cityInfo.main.temp_max)}° Low:{' '}
+                  {roundNumber(cityInfo.main.temp_min)}°
+                </Text>
+              </View>
+            </View>
+          </BackgroundWeather>
         </TouchableOpacity>
       )}
     </View>
@@ -79,17 +85,14 @@ export const CityPreview = ({ el }) => {
 }
 
 const styles = StyleSheet.create({
-  cardStyle: {
-    backgroundColor: 'white',
-    margin: 10,
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+  inWeather: {
+    flex: 1,
     borderRadius: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    margin: 10,
   },
   cardElem: {
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
 })
