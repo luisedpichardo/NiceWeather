@@ -7,6 +7,7 @@ import { TempInfoDisplay } from '../components/TempInfoDisplay.js'
 import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
+import { BackgroundWeather } from './BackgroundWeather.js'
 
 export const DisplayWeather = ({ route }) => {
   const [loader, setLoader] = useState(true)
@@ -43,23 +44,25 @@ export const DisplayWeather = ({ route }) => {
       {loader ? (
         <Loading />
       ) : (
-        <View style={styles.infoContainer}>
-          <View style={styles.addRemStyle}>
-            {route.params.fromList ? (
-              <RemoveCity cityData={route.params} />
-            ) : (
-              <AddCity cityData={route.params} />
-            )}
-          </View>
+        <BackgroundWeather icon={route.params.cityData.weather[0].icon}>
+          <View style={styles.infoContainer}>
+            <View style={styles.addRemStyle}>
+              {route.params.fromList ? (
+                <RemoveCity cityData={route.params} />
+              ) : (
+                <AddCity cityData={route.params} />
+              )}
+            </View>
 
-          <TemperatureHdr
-            style={{ felx: 9 }}
-            weatherInfo={route.params.cityData}
-          />
-          <ScrollView style={{ flex: 30 }}>
-            <TempInfoDisplay infoPerHrList={forecastData.list} />
-          </ScrollView>
-        </View>
+            <TemperatureHdr
+              style={{ felx: 9 }}
+              weatherInfo={route.params.cityData}
+              />
+            <ScrollView style={{ flex: 30 }}>
+              <TempInfoDisplay infoPerHrList={forecastData.list} />
+            </ScrollView>
+          </View>
+        </BackgroundWeather>
       )}
     </View>
   )
@@ -71,14 +74,15 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    backgroundColor: 'lightblue',
     paddingTop: 70,
     padding: 30,
     paddingBottom: 50,
   },
   addRemStyle: {
+    backgroundColor: 'aliceblue',
     padding: 5,
-    alignItems: 'flex-end',
+    alignSelf: 'flex-end',
     margin: 5,
+    borderRadius: 10,
   },
 })
