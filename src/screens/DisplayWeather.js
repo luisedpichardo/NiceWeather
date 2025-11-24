@@ -85,9 +85,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   addRemStyle: {
-    padding: 5,
+    padding: 10,
     alignSelf: 'flex-end',
-    margin: 5,
-    borderRadius: 10,
   },
 })
