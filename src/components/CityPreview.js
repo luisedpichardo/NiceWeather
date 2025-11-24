@@ -59,13 +59,15 @@ export const CityPreview = ({ el }) => {
           onPress={() => openCityScreen(el)}
         >
           <View style={styles.cardElem}>
-            <Text>
+            <Text style={{ fontSize: 20 }}>
               {el.city}, {el.country}
             </Text>
-            <Text>{roundNumber(cityInfo.main.temp)}°</Text>
+            <WeatherIcon icon={cityInfo.weather[0].icon} />
           </View>
           <View style={styles.cardElem}>
-            <WeatherIcon icon={cityInfo.weather[0].icon} />
+            <Text style={{ alignSelf: 'flex-end', fontSize: 25 }}>
+              {roundNumber(cityInfo.main.temp)}°
+            </Text>
             <Text>
               High: {roundNumber(cityInfo.main.temp_max)}° Low:{' '}
               {roundNumber(cityInfo.main.temp_min)}°
@@ -80,12 +82,15 @@ export const CityPreview = ({ el }) => {
 const styles = StyleSheet.create({
   cardStyle: {
     backgroundColor: 'white',
-    margin: 20,
-    padding: 30,
+    margin: 10,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
     borderRadius: 25,
-  },
-  cardElem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  cardElem: {
+    justifyContent: 'space-around',
   },
 })

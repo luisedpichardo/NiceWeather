@@ -4,7 +4,7 @@ export const cityList = create(set => ({
   cities: [],
   addCity: city =>
     set(state => ({
-      cities: [...state.cities, city],
+      cities: [city, ...state.cities],
     })),
   removeCity: cityName =>
     set(state => ({
