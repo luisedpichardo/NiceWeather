@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   btn: {
-    color: 'lightblue',
+    justifyContent:'center',
+    marginRight: 10,
   },
 })

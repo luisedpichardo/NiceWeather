@@ -6,6 +6,7 @@ import { TemperatureHdr } from '../components/TemperatureHdr.js'
 import { TempInfoDisplay } from '../components/TempInfoDisplay.js'
 import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
+import { Loading } from '../components/Loading.js'
 
 export const DisplayWeather = ({ route }) => {
   const [loader, setLoader] = useState(true)
@@ -40,9 +41,7 @@ export const DisplayWeather = ({ route }) => {
   return (
     <View style={styles.container}>
       {loader ? (
-        <View>
-          <Text>Loading...</Text>
-        </View>
+        <Loading />
       ) : (
         <View style={styles.infoContainer}>
           <View style={styles.addRemStyle}>

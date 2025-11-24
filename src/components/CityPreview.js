@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Config from '../../config.local.js'
 import { WeatherIcon } from './WeatherIcon'
+import { Loading } from './Loading.js'
 import { roundNumber } from '../utils/roundNumber.js'
 
 export const CityPreview = ({ el }) => {
@@ -50,9 +51,7 @@ export const CityPreview = ({ el }) => {
   return (
     <View>
       {loader ? (
-        <View style={styles.cardStyle}>
-          <Text>loading...</Text>
-        </View>
+        <Loading style={styles.cardStyle}/>
       ) : (
         <TouchableOpacity
           style={styles.cardStyle}
