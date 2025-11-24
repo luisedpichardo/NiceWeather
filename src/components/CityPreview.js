@@ -63,17 +63,17 @@ export const CityPreview = ({ el }) => {
           >
             <View style={styles.inWeather}>
               <View style={styles.cardElem}>
-                <Text style={{ fontSize: 20 }}>
+                <Text style={{ fontSize: 20, ...styles.textWhite }}>
                   {el.city}, {el.country}
                 </Text>
                 <WeatherIcon icon={cityInfo.weather[0].icon} />
               </View>
 
               <View style={styles.cardElem}>
-                <Text style={{ alignSelf: 'flex-end', fontSize: 25 }}>
+                <Text style={{ alignSelf: 'flex-end', fontSize: 25, ...styles.textWhite }}>
                   {roundNumber(cityInfo.main.temp)}°
                 </Text>
-                <Text>
+                <Text style={styles.textWhite}>
                   High: {roundNumber(cityInfo.main.temp_max)}° Low:{' '}
                   {roundNumber(cityInfo.main.temp_min)}°
                 </Text>
@@ -97,4 +97,7 @@ const styles = StyleSheet.create({
   cardElem: {
     justifyContent: 'center',
   },
+  textWhite: {
+    color: 'white'
+  }
 })
