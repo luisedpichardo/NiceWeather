@@ -1,35 +1,50 @@
 import { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 
 export const BackgroundWeather = ({ icon, children }) => {
-  const [bgWeather, setBgWeather] = useState('')
+  const [bgWeather, setBgWeather] = useState(['#fff', '#fff'])
 
   useEffect(() => {
-    selectBackground()
-  }, [])
+    setBgWeather(selectBackground(icon))
+  }, [icon])
 
-  const selectBackground = () => {
-    if (icon === '01d') setBgWeather('#87CEEB')
-    else if (icon === '01n') setBgWeather('#0B132B')
-    else if (icon === '02d') setBgWeather('#A0C4FF')
-    else if (icon === '02n') setBgWeather('#1C2541')
-    else if (icon === '03d') setBgWeather('#B0BEC5')
-    else if (icon === '03n') setBgWeather('#3A4750')
-    else if (icon === '04d') setBgWeather('#90A4AE')
-    else if (icon === '04n') setBgWeather('#2C3E50')
-    else if (icon === '09d') setBgWeather('#4E89AE')
-    else if (icon === '09n') setBgWeather('#1B2A41')
-    else if (icon === '10d') setBgWeather('#5DADE2')
-    else if (icon === '10n') setBgWeather('#162447')
-    else if (icon === '11d') setBgWeather('#34495E')
-    else if (icon === '11n') setBgWeather('#0D1B2A')
-    else if (icon === '13d') setBgWeather('#D6EAF8')
-    else if (icon === '13n') setBgWeather('#566573')
-    else if (icon === '50d') setBgWeather('#DCDCDC')
-    else setBgWeather('#7F8C8D')
+  const selectBackground = icon => {
+    switch (icon) {
+      case '01d': // Clear Sky Day
+        return ['#56CCF2', '#2F80ED']
+      case 'o1n': // Clear Sky Night
+        return ['#0f2027', '#203a43', '#2c5364']
+      case '02d': // Few Clouds Day
+        return ['#87CEEB', '#B0E0E6']
+      case '02n': // Few Clouds Night
+        return ['#1c1c2d', '#3a3a52']
+      case '03d': // Scatterd Clouds
+      case '03n':
+        return ['#757F9A', '#D7DDE8']
+      case '04d': // Broken Clouds
+      case '04n':
+        return ['#606c88', '#3f4c6b']
+      case '09d': // Shower Rain
+      case '09n':
+        return ['#4b79a1', '#283e51']
+      case '10d': // Rain Day
+        return ['#74ebd5', '#ACB6E5']
+      case '10n': // Rain Night
+        return ['#141E30', '#243B55']
+      case '11d': // Thunderstorm
+      case '11n':
+        return ['#232526', '#414345']
+      case '13d': // Snow
+      case '13n':
+        return ['#E0EAFC', '#CFDEF3']
+      default: // Default / Miss
+        return ['#bdc3c7', '#2c3e50']
+    }
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: bgWeather }}>{children}</View>
+    <LinearGradient style={{ flex: 1 }} colors={bgWeather}>
+      {children}
+    </LinearGradient>
   )
 }
