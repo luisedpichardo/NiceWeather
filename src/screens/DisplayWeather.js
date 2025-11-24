@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native'
 import { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 import Config from '../../config.local.js'
 import { TemperatureHdr } from '../components/TemperatureHdr.js'
@@ -10,6 +11,7 @@ import { Loading } from '../components/Loading.js'
 import { BackgroundWeather } from './BackgroundWeather.js'
 
 export const DisplayWeather = ({ route }) => {
+  const navigation = useNavigation()
   const [loader, setLoader] = useState(true)
   const [forecastData, setForecastData] = useState(null)
 
@@ -37,7 +39,18 @@ export const DisplayWeather = ({ route }) => {
 
   useEffect(() => {
     getForecastByName()
-  }, [])
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={styles.addRemStyle}>
+          {route.params.fromList ? (
+            <RemoveCity cityData={route.params} />
+          ) : (
+            <AddCity cityData={route.params} />
+          )}
+        </View>
+      )
+    })
+  }, [navigation])
 
   return (
     <View style={styles.container}>
@@ -46,14 +59,6 @@ export const DisplayWeather = ({ route }) => {
       ) : (
         <BackgroundWeather icon={route.params.cityData.weather[0].icon}>
           <View style={styles.infoContainer}>
-            <View style={styles.addRemStyle}>
-              {route.params.fromList ? (
-                <RemoveCity cityData={route.params} />
-              ) : (
-                <AddCity cityData={route.params} />
-              )}
-            </View>
-
             <TemperatureHdr
               style={{ felx: 9 }}
               weatherInfo={route.params.cityData}
@@ -83,7 +88,6 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: 'flex-end',
     margin: 5,
-    marginTop: 25,
     borderRadius: 10,
   },
 })
