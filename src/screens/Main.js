@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import * as React from 'react'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 
 import { cityList } from '../stores/store-cityList.js'
 import { SearchBar } from '../components/SearchBar.js'
@@ -7,8 +7,8 @@ import { CityPreview } from '../components/CityPreview.js'
 
 class Main extends React.Component {
   unsubscribe = null
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       cities: cityList.getState().cities,
     }
@@ -19,6 +19,16 @@ class Main extends React.Component {
     this.unsubscribe = cityList.subscribe(newState => {
       this.setState({ cities: newState.cities })
     })
+    this.props.navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={{ margin: 5 }}
+          onPress={() => this.props.navigation.navigate('Settings')}
+        >
+          <Text style={{ fontSize: 16, color: 'white' }}>Settings</Text>
+        </TouchableOpacity>
+      ),
+    });
   }
 
   componentWillUnmount() {
@@ -51,7 +61,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   titleStyle: {
-    paddingTop: 70,
+    paddingTop: 80,
     paddingLeft: 30,
     paddingBottom: 10,
     fontSize: 40,

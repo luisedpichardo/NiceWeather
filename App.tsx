@@ -6,16 +6,16 @@
  */
 
 import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import {
   SafeAreaProvider,
-  useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Main from './src/screens/Main.js'
 import { DisplayWeather } from './src/screens/DisplayWeather.js'
+import { Settings } from './src/screens/Settings.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +27,7 @@ function MyStack() {
     }}>
       <Stack.Screen name="Main" component={Main} />
       <Stack.Screen name="Weather" component={DisplayWeather} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );
 }
