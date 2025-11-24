@@ -10,4 +10,10 @@ export const cityList = create(set => ({
     set(state => ({
       cities: state.cities.filter(c => c.city !== cityName),
     })),
+  cityExists: cityName => {
+    return cityList
+      .getState()
+      .cities
+      .some(c => c.city.toLowerCase() === cityName.toLowerCase())
+  },
 }))

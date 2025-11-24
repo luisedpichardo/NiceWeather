@@ -7,13 +7,13 @@ export const Loading = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'lightblue',
+        backgroundColor: 'aliceblue',
       }}
     >
-      <ActivityIndicator size="large" color="white" />
+      <ActivityIndicator size="large" color="black" />
       <Text
         style={{
-          color: 'white',
+          color: 'black',
         }}
       >
         Loading...

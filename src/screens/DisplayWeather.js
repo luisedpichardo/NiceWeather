@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     padding: 5,
     alignSelf: 'flex-end',
     margin: 5,
+    marginTop: 25,
     borderRadius: 10,
   },
 })

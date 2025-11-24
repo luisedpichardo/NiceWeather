@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 import Config from '../../config.local.js'
+import { cityList } from '../stores/store-cityList.js'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
@@ -26,6 +27,15 @@ export const CityInput = ({ citiesList }) => {
       .then(json => {
         // Check if success
         if (json.cod === 200) {
+          // Check if city exists in list
+          if(cityList.getState().cityExists(json.name)){
+            navigation.navigate('Weather', {
+              fromList: true,
+              cityData: { ...json },
+              citiesList: citiesList,
+            })
+            return 
+          }
           navigation.navigate('Weather', {
             fromList: false,
             cityData: { ...json },
