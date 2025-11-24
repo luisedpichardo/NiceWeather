@@ -1,12 +1,20 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native'
 
 import { cityList } from '../stores/store-cityList.js'
 import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
+import { unitType } from '../stores/store-unitType.js'
 
 class Main extends React.Component {
-  unsubscribe = null
+  unsubscribeCities = null
+  unsubscribeUnits = null
   constructor(props) {
     super(props)
     this.state = {
@@ -15,9 +23,13 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    // subscribe to store changes
-    this.unsubscribe = cityList.subscribe(newState => {
+    // subscribe to cities changes
+    this.unsubscribeCities = cityList.subscribe(newState => {
       this.setState({ cities: newState.cities })
+    })
+    // subscribe to unit changes
+    this.unsubscribeUnits = unitType.subscribe(newState => {
+      this.setState({ unit: newState.unit })
     })
     this.props.navigation.setOptions({
       headerRight: () => (
@@ -28,7 +40,7 @@ class Main extends React.Component {
           <Text style={{ fontSize: 16, color: 'white' }}>Settings</Text>
         </TouchableOpacity>
       ),
-    });
+    })
   }
 
   componentWillUnmount() {

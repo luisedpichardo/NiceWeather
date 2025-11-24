@@ -11,14 +11,16 @@ import { useNavigation } from '@react-navigation/native'
 
 import Config from '../../config.local.js'
 import { cityList } from '../stores/store-cityList.js'
+import { unitType } from '../stores/store-unitType.js'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
+  const unit = unitType.getState().unit
 
   const lookCity = () => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Config.API_WORK_KEY}&units=imperial`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Config.API_WORK_KEY}&units=${unit}`,
     )
       .then(response => {
         // Parse to json
@@ -28,13 +30,13 @@ export const CityInput = ({ citiesList }) => {
         // Check if success
         if (json.cod === 200) {
           // Check if city exists in list
-          if(cityList.getState().cityExists(json.name)){
+          if (cityList.getState().cityExists(json.name)) {
             navigation.navigate('Weather', {
               fromList: true,
               cityData: { ...json },
               citiesList: citiesList,
             })
-            return 
+            return
           }
           navigation.navigate('Weather', {
             fromList: false,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   btn: {
-    justifyContent:'center',
+    justifyContent: 'center',
     marginRight: 10,
   },
 })

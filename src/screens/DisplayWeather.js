@@ -9,15 +9,17 @@ import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
 import { BackgroundWeather } from './BackgroundWeather.js'
+import { unitType } from '../stores/store-unitType.js'
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation()
   const [loader, setLoader] = useState(true)
   const [forecastData, setForecastData] = useState(null)
+  const unit = unitType.getState().unit
 
   const getForecastByName = () => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.cityData.name}&appid=${Config.API_WORK_KEY}&units=imperial`,
+      `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.cityData.name}&appid=${Config.API_WORK_KEY}&units=${unit}`,
     )
       .then(response => {
         // Parse to json
@@ -48,7 +50,7 @@ export const DisplayWeather = ({ route }) => {
             <AddCity cityData={route.params} />
           )}
         </View>
-      )
+      ),
     })
   }, [navigation])
 
@@ -58,14 +60,14 @@ export const DisplayWeather = ({ route }) => {
         <Loading />
       ) : (
         <BackgroundWeather icon={route.params.cityData.weather[0].icon}>
-            <View style={styles.infoContainer}>
-              <TemperatureHdr
-                style={{ felx: 9 }}
-                weatherInfo={route.params.cityData}
-              />
-              <ScrollView style={{ flex: 30 }}>
-                <TempInfoDisplay infoPerHrList={forecastData.list} />
-              </ScrollView>
+          <View style={styles.infoContainer}>
+            <TemperatureHdr
+              style={{ felx: 9 }}
+              weatherInfo={route.params.cityData}
+            />
+            <ScrollView style={{ flex: 30 }}>
+              <TempInfoDisplay infoPerHrList={forecastData.list} />
+            </ScrollView>
           </View>
         </BackgroundWeather>
       )}

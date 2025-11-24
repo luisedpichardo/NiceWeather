@@ -7,19 +7,21 @@ import { WeatherIcon } from './WeatherIcon'
 import { Loading } from './Loading.js'
 import { BackgroundWeather } from '../screens/BackgroundWeather.js'
 import { roundNumber } from '../utils/roundNumber.js'
+import { unitType } from '../stores/store-unitType.js'
 
 export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
   const [loader, setLoader] = useState(true)
   const [cityInfo, setCityInfo] = useState(null)
+  const unit = unitType.getState().unit
 
   useEffect(() => {
     getCityInfo()
-  }, [])
+  }, [unit])
 
   const getCityInfo = () => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${el.city},${el.country}&appid=${Config.API_WORK_KEY}&units=imperial`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${el.city},${el.country}&appid=${Config.API_WORK_KEY}&units=${unit}`,
     )
       .then(response => {
         // Parse to json
