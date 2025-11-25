@@ -2,6 +2,7 @@ import { Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { cityList } from '../stores/store-cityList.js'
+// import { CityReducer } from '../reducers/CityReducer.js'
 
 export const AddCity = ({ cityData }) => {
   const navigation = useNavigation()
@@ -11,6 +12,13 @@ export const AddCity = ({ cityData }) => {
       country: cityData.cityData.sys.country,
       fromList: true,
     }
+    // // Call reducer
+    // CityReducer([], {
+    //   type: 'ADD',
+    //   payload: {
+    //     city: city
+    //   }
+    // })
     cityList.getState().addCity(city)
     navigation.goBack()
   }
