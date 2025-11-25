@@ -1,8 +1,19 @@
+import { useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Text } from 'react-native'
+
 import { TempOptSettings } from '../components/TempOptSettings.js'
 import { unitType } from '../stores/store-unitType.js'
 
 export const Settings = ({ route }) => {
+  const navigation = useNavigation()
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: 'white',
+    })
+  }, [navigation])
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleStyle}>Settings</Text>
