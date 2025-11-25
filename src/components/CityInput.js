@@ -9,23 +9,15 @@ import {
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-import Config from '../../config.local.js'
 import { cityList } from '../stores/store-cityList.js'
-import { unitType } from '../stores/store-unitType.js'
+import { lookCityService } from '../services/WeatherSercive.js'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
-  const unit = unitType.getState().unit
 
   const lookCity = () => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Config.API_WORK_KEY}&units=${unit}`,
-    )
-      .then(response => {
-        // Parse to json
-        return response.json()
-      })
+    lookCityService(city)
       .then(json => {
         // Check if success
         if (json.cod === 200) {

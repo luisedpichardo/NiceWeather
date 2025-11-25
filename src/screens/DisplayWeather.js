@@ -1,30 +1,22 @@
-import { View, StyleSheet, Alert, ScrollView } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-import Config from '../../config.local.js'
 import { TemperatureHdr } from '../components/TemperatureHdr.js'
 import { TempInfoDisplay } from '../components/TempInfoDisplay.js'
 import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
 import { BackgroundWeather } from './BackgroundWeather.js'
-import { unitType } from '../stores/store-unitType.js'
+import { getForecastByNameService } from '../services/WeatherSercive.js'
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation()
   const [loader, setLoader] = useState(true)
   const [forecastData, setForecastData] = useState(null)
-  const unit = unitType.getState().unit
 
   const getForecastByName = () => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${route.params.cityData.name}&appid=${Config.API_WORK_KEY}&units=${unit}`,
-    )
-      .then(response => {
-        // Parse to json
-        return response.json()
-      })
+    getForecastByNameService(route.params.cityData.name)
       .then(json => {
         if (json.cod === '200') {
           setForecastData(json)
@@ -36,6 +28,7 @@ export const DisplayWeather = ({ route }) => {
       })
       .catch(error => {
         Alert.alert(error.message)
+        navigation.goBack()
       })
   }
 
@@ -68,6 +61,9 @@ export const DisplayWeather = ({ route }) => {
             <ScrollView style={{ flex: 30 }}>
               <TempInfoDisplay infoPerHrList={forecastData.list} />
             </ScrollView>
+            <View>
+              <Text>Hello there</Text>
+            </View>
           </View>
         </BackgroundWeather>
       )}
