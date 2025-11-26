@@ -8,7 +8,7 @@ import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
 import { BackgroundWeather } from './BackgroundWeather.js'
-import { getForecastByNameService } from '../services/WeatherSercive.js'
+import { weatherService } from '../services/WeatherSercive.js'
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation()
@@ -16,7 +16,7 @@ export const DisplayWeather = ({ route }) => {
   const [forecastData, setForecastData] = useState(null)
 
   const getForecastByName = () => {
-    getForecastByNameService(route.params.cityData.name)
+    weatherService(route.params.cityData.name, 'forecast')
       .then(json => {
         if (json.cod === '200') {
           setForecastData(json)

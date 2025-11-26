@@ -10,14 +10,14 @@ import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 import { cityList } from '../stores/store-cityList.js'
-import { lookCityService } from '../services/WeatherSercive.js'
+import { weatherService } from '../services/WeatherSercive.js'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
 
   const lookCity = () => {
-    lookCityService(city)
+    weatherService(city, 'weather')
       .then(json => {
         // Check if success
         if (json.cod === 200) {

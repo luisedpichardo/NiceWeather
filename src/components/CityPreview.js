@@ -6,7 +6,7 @@ import { WeatherIcon } from './WeatherIcon'
 import { Loading } from './Loading.js'
 import { BackgroundWeather } from '../screens/BackgroundWeather.js'
 import { roundNumber } from '../utils/roundNumber.js'
-import { getCityInfoService } from '../services/WeatherSercive.js'
+import { weatherService } from '../services/WeatherSercive.js'
 
 export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
@@ -19,7 +19,7 @@ export const CityPreview = ({ el }) => {
   }, [])
 
   const getCityInfo = () => {
-    getCityInfoService(el.city, el.country)
+    weatherService(el.city+','+el.country, 'weather')
       .then(json => {
         // Check if success
         if (json.cod === 200) {
