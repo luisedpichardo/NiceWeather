@@ -11,13 +11,15 @@ import { useNavigation } from '@react-navigation/native'
 
 import { cityList } from '../stores/store-cityList.js'
 import { weatherService } from '../services/WeatherSercive.js'
+import { unitType } from '../stores/store-unitType'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
+  const unit = unitType.getState().unit
 
   const lookCity = () => {
-    weatherService(city, 'weather')
+    weatherService(city, 'weather', unit)
       .then(json => {
         // Check if success
         if (json.cod === 200) {
