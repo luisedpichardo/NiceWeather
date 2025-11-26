@@ -1,40 +1,20 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { useEffect, useState } from 'react'
 
 import { WeatherIcon } from './WeatherIcon'
 import { Loading } from './Loading.js'
 import { BackgroundWeather } from '../screens/BackgroundWeather.js'
 import { roundNumber } from '../utils/roundNumber.js'
-import { weatherService } from '../services/WeatherSercive.js'
 import { unitType } from '../stores/store-unitType'
+import { useFetchWeatherPrev } from '../hooks/useFetchWeatherPrev.js'
 
 export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
-  const [loader, setLoader] = useState(true)
-  const [cityInfo, setCityInfo] = useState(null)
-  const unit = unitType.getState().unit
-
-  useEffect(() => {
-    getCityInfo()
-  }, [unit])
-
-  const getCityInfo = () => {
-    weatherService(el.city+','+el.country, 'weather', unit)
-      .then(json => {
-        // Check if success
-        if (json.cod === 200) {
-          setCityInfo(json)
-          setLoader(false)
-          return
-        }
-        // Other wise throw an error
-        throw Error(json.message)
-      })
-      .catch(error => {
-        Alert.alert(error.message)
-      })
-  }
+  const { cityInfo, loader } = useFetchWeatherPrev(
+    el.city + ',' + el.country,
+    'weather',
+    unitType.getState().unit,
+  )
 
   const openCityScreen = el => {
     let payload = {
