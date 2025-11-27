@@ -18,6 +18,7 @@ import { DisplayWeather } from './src/screens/DisplayWeather.js'
 import { Settings } from './src/screens/Settings.js'
 // Providers
 import { UnitProvider } from './src/contexts/UnitContext.js'
+import { CitiesProvider } from './src/contexts/CityContext.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -40,11 +41,13 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <UnitProvider>
-        <NavigationContainer>
-          <MyStack />
-        </NavigationContainer>
-      </UnitProvider>
+      <CitiesProvider>
+        <UnitProvider>
+          <NavigationContainer>
+            <MyStack />
+          </NavigationContainer>
+        </UnitProvider>
+      </CitiesProvider>
     </SafeAreaProvider>
   );
 }

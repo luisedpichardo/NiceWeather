@@ -7,24 +7,15 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { cityList } from '../stores/store-cityList.js'
 import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
+// Context
+import { CitiesContext } from '../contexts/CityContext.js'
 
 class Main extends React.Component {
-  unsubscribeCities = null
-  constructor(props) {
-    super(props)
-    this.state = {
-      cities: cityList.getState().cities,
-    }
-  }
+  static contextType = CitiesContext
 
   componentDidMount() {
-    // subscribe to cities changes
-    this.unsubscribeCities = cityList.subscribe(newState => {
-      this.setState({ cities: newState.cities })
-    })
     this.props.navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
@@ -37,20 +28,15 @@ class Main extends React.Component {
     })
   }
 
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe()
-    }
-  }
-
   render() {
+    const citiesList = this.context
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
-        <SearchBar citiesList={this.state.cities} />
+        <SearchBar citiesList={citiesList} />
         <ScrollView style={{ flex: 1 }}>
           <View>
-            {this.state.cities.map(el => {
+            {citiesList.map(el => {
               return <CityPreview key={`${el.city}-${el.country}`} el={el} />
             })}
           </View>

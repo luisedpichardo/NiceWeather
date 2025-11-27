@@ -11,12 +11,14 @@ import { BackgroundWeather } from './BackgroundWeather.js'
 import { weatherService } from '../services/WeatherSercive.js'
 // Context
 import { useUnit } from '../contexts/UnitContext.js'
+import { useCities } from '../contexts/CityContext.js'
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation()
   const [loader, setLoader] = useState(true)
   const [forecastData, setForecastData] = useState(null)
   const unit = useUnit()
+  const cities = useCities()
 
   const getForecastByName = () => {
     weatherService(route.params.cityData.name, 'forecast', unit)
@@ -40,7 +42,7 @@ export const DisplayWeather = ({ route }) => {
     navigation.setOptions({
       headerRight: () => (
         <View style={styles.addRemStyle}>
-          {route.params.fromList ? (
+          {cities.some(elem => route.params.cityData.name === elem.city) ? (
             <RemoveCity cityData={route.params} />
           ) : (
             <AddCity cityData={route.params} />

@@ -9,32 +9,31 @@ import {
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-import { cityList } from '../stores/store-cityList.js'
 import { weatherService } from '../services/WeatherSercive.js'
 // Context
 import { useUnit } from '../contexts/UnitContext.js'
+import { useCities } from '../contexts/CityContext.js'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
   const unit = useUnit()
+  const cities = useCities()
 
   const lookCity = () => {
     weatherService(city, 'weather', unit)
       .then(json => {
         // Check if success
         if (json.cod === 200) {
-          // Check if city exists in list
-          if (cityList.getState().cityExists(json.name)) {
+          // Check if city exists in cities context
+          if(cities.some(elem => elem.city === json.name)){
             navigation.navigate('Weather', {
-              fromList: true,
               cityData: { ...json },
               citiesList: citiesList,
             })
             return
           }
           navigation.navigate('Weather', {
-            fromList: false,
             cityData: { ...json },
             citiesList: citiesList,
           })
