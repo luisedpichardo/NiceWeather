@@ -1,24 +1,20 @@
 import { Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-
-// import { CityReducer } from '../reducers/CityReducer.js'
 // Context
-import { useCities, useCitiesUpdate } from '../contexts/CityContext.js'
+import { useCitiesUpdate } from '../contexts/CityContext.js'
+import { ACTIONS } from '../reducers/CityReducer.js'
 
 export const RemoveCity = ({ cityData }) => {
   const navigation = useNavigation()
-  const cities = useCities()
-  const setCities = useCitiesUpdate()
+  const dispatchCities = useCitiesUpdate()
   const removeCityfromList = () => {
-    // // Call reducer
-    // CityReducer([], {
-    //   type: 'REMOVE',
-    //   payload: {
-    //     city: city
-    //   }
-    // })
-    // Remove city from context and go back
-    setCities(cities.filter(elem => elem.city !== cityData.cityData.name))
+    // Call reducer
+    dispatchCities({
+      type: ACTIONS.REMOVE,
+      payload: {
+        city: cityData.cityData.name,
+      },
+    })
     navigation.goBack()
   }
 

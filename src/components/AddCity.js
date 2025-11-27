@@ -1,27 +1,24 @@
 import { Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-
-// import { CityReducer } from '../reducers/CityReducer.js'
 // Context
-import { useCities, useCitiesUpdate } from '../contexts/CityContext.js'
+import { useCitiesUpdate } from '../contexts/CityContext.js'
+import { ACTIONS } from '../reducers/CityReducer.js'
 
 export const AddCity = ({ cityData }) => {
   const navigation = useNavigation()
-  const cities = useCities()
-  const setCities = useCitiesUpdate()
+  const dispatchCities = useCitiesUpdate()
   const addCityToList = () => {
     let city = {
       city: cityData.cityData.name,
       country: cityData.cityData.sys.country,
     }
-    // // Call reducer
-    // CityReducer([], {
-    //   type: 'ADD',
-    //   payload: {
-    //     city: city
-    //   }
-    // })
-    setCities([city, ...cities])
+    // Call reducer
+    dispatchCities({
+      type: ACTIONS.ADD,
+      payload: {
+        city: city,
+      },
+    })
     navigation.goBack()
   }
 

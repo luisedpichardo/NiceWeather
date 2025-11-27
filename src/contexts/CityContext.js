@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useReducer } from 'react'
+import { CityReducer } from '../reducers/CityReducer.js'
 
 export const CitiesContext = createContext()
 const CitiesUpdateContext = createContext()
@@ -8,18 +9,16 @@ export function useCities() {
 }
 
 export function useCitiesUpdate() {
-    return useContext(CitiesUpdateContext)
+  return useContext(CitiesUpdateContext)
 }
 
 export function CitiesProvider({ children }) {
-  const [cities, setCities] = useState([])
-
-  console.log(cities)
+  const [cities, dispatchCities] = useReducer(CityReducer, [])
 
   return (
     <CitiesContext.Provider value={cities}>
-      <CitiesUpdateContext.Provider value={setCities}>
-            {children}
+      <CitiesUpdateContext.Provider value={dispatchCities}>
+        {children}
       </CitiesUpdateContext.Provider>
     </CitiesContext.Provider>
   )
