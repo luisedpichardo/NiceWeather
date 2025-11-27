@@ -11,12 +11,13 @@ import { useNavigation } from '@react-navigation/native'
 
 import { cityList } from '../stores/store-cityList.js'
 import { weatherService } from '../services/WeatherSercive.js'
-import { unitType } from '../stores/store-unitType'
+// Context
+import { useUnit } from '../contexts/UnitContext.js'
 
 export const CityInput = ({ citiesList }) => {
   const navigation = useNavigation()
   const [city, setCity] = useState('')
-  const unit = unitType.getState().unit
+  const unit = useUnit()
 
   const lookCity = () => {
     weatherService(city, 'weather', unit)

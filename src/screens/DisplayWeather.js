@@ -9,13 +9,14 @@ import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
 import { BackgroundWeather } from './BackgroundWeather.js'
 import { weatherService } from '../services/WeatherSercive.js'
-import { unitType } from '../stores/store-unitType'
+// Context
+import { useUnit } from '../contexts/UnitContext.js'
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation()
   const [loader, setLoader] = useState(true)
   const [forecastData, setForecastData] = useState(null)
-  const unit = unitType.getState().unit
+  const unit = useUnit()
 
   const getForecastByName = () => {
     weatherService(route.params.cityData.name, 'forecast', unit)

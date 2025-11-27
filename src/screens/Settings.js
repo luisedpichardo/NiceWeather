@@ -3,7 +3,8 @@ import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Text } from 'react-native'
 
 import { TempOptSettings } from '../components/TempOptSettings.js'
-import { unitType } from '../stores/store-unitType.js'
+// Context
+import { useUnits } from '../contexts/UnitContext.js'
 
 export const Settings = ({ route }) => {
   const navigation = useNavigation()
@@ -20,7 +21,7 @@ export const Settings = ({ route }) => {
       <View style={styles.optionsCont}>
         <Text style={{ color: 'white', marginLeft: 20 }}>Temperature</Text>
         <View style={styles.tempCont}>
-          {unitType.getState().units.map(el => {
+          {useUnits().map(el => {
             return <TempOptSettings key={`${el.value}`} el={el} />
           })}
         </View>

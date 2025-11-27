@@ -16,6 +16,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Main from './src/screens/Main.js'
 import { DisplayWeather } from './src/screens/DisplayWeather.js'
 import { Settings } from './src/screens/Settings.js'
+// Providers
+import { UnitProvider } from './src/contexts/UnitContext.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -38,9 +40,11 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer>
-        <MyStack />
-      </NavigationContainer>
+      <UnitProvider>
+        <NavigationContainer>
+          <MyStack />
+        </NavigationContainer>
+      </UnitProvider>
     </SafeAreaProvider>
   );
 }

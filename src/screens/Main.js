@@ -10,11 +10,9 @@ import {
 import { cityList } from '../stores/store-cityList.js'
 import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
-import { unitType } from '../stores/store-unitType.js'
 
 class Main extends React.Component {
   unsubscribeCities = null
-  unsubscribeUnits = null
   constructor(props) {
     super(props)
     this.state = {
@@ -26,10 +24,6 @@ class Main extends React.Component {
     // subscribe to cities changes
     this.unsubscribeCities = cityList.subscribe(newState => {
       this.setState({ cities: newState.cities })
-    })
-    // subscribe to unit changes
-    this.unsubscribeUnits = unitType.subscribe(newState => {
-      this.setState({ unit: newState.unit })
     })
     this.props.navigation.setOptions({
       headerRight: () => (

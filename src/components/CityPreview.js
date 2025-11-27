@@ -5,15 +5,16 @@ import { WeatherIcon } from './WeatherIcon'
 import { Loading } from './Loading.js'
 import { BackgroundWeather } from '../screens/BackgroundWeather.js'
 import { roundNumber } from '../utils/roundNumber.js'
-import { unitType } from '../stores/store-unitType'
 import { useFetchWeatherPrev } from '../hooks/useFetchWeatherPrev.js'
+// Context
+import { useUnit } from '../contexts/UnitContext.js'
 
 export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
   const { cityInfo, loader } = useFetchWeatherPrev(
     el.city + ',' + el.country,
     'weather',
-    unitType.getState().unit,
+    useUnit(),
   )
 
   const openCityScreen = el => {
