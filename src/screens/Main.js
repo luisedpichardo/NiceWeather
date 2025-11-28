@@ -33,7 +33,7 @@ class Main extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
-        <SearchBar citiesList={citiesList} />
+        <SearchBar />
         <ScrollView style={{ flex: 1 }}>
           <View>
             {citiesList.map(el => {

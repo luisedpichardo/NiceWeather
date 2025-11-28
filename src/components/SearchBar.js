@@ -2,7 +2,7 @@ import { View, StyleSheet, Image } from 'react-native'
 
 import { CityInput } from './CityInput.js'
 
-export const SearchBar = ({ citiesList }) => {
+export const SearchBar = () => {
   return (
     <View style={styles.inputStyle}>
       <View>
@@ -11,7 +11,7 @@ export const SearchBar = ({ citiesList }) => {
           style={styles.imgStyle}
         />
       </View>
-      <CityInput citiesList={citiesList} />
+      <CityInput />
     </View>
   )
 }
