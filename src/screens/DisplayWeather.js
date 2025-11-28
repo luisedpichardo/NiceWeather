@@ -1,17 +1,19 @@
 import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-
+// Components
 import { TemperatureHdr } from '../components/TemperatureHdr.js'
-import { TempInfoDisplay } from '../components/TempInfoDisplay.js'
+import { TempHrDisplay } from '../components/TempHrDisplay.js'
 import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
-import { BackgroundWeather } from './BackgroundWeather.js'
-import { weatherService } from '../services/WeatherSercive.js'
-// Context
+// Contexts
 import { useUnit } from '../contexts/UnitContext.js'
 import { useCities } from '../contexts/CityContext.js'
+// Screens
+import { BackgroundWeather } from './BackgroundWeather.js'
+// Services
+import { weatherService } from '../services/WeatherSercive.js'
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation()
@@ -43,7 +45,7 @@ export const DisplayWeather = ({ route }) => {
       headerRight: () => (
         <View style={styles.addRemStyle}>
           {cities.some(elem => route.params.cityData.name === elem.city) ? (
-            <RemoveCity cityData={route.params} />
+            <RemoveCity cityData={route.params.cityData} />
           ) : (
             <AddCity cityData={route.params} />
           )}
@@ -64,7 +66,7 @@ export const DisplayWeather = ({ route }) => {
               weatherInfo={route.params.cityData}
             />
             <ScrollView style={{ flex: 30 }}>
-              <TempInfoDisplay infoPerHrList={forecastData.list} />
+              <TempHrDisplay infoPerHrList={forecastData.list} />
             </ScrollView>
             <View>
               <Text>Hello there</Text>

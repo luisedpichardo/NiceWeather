@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native'
-
+// Utils
 import { roundNumber } from '../utils/roundNumber'
 
 export const TemperatureHdr = ({ weatherInfo }) => {

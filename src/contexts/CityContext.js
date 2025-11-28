@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react'
+// Reducers
 import { CityReducer } from '../reducers/CityReducer.js'
 
 export const CitiesContext = createContext()

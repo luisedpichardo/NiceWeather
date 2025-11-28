@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
-
+// Components
 import { SearchBtn } from './SearchBtn.js'
 
 export const CityInput = () => {

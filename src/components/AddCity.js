@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-// Context
+// Contexts
 import { useCitiesUpdate } from '../contexts/CityContext.js'
 import { ACTIONS } from '../reducers/CityReducer.js'
 

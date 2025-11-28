@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
 import { View, StyleSheet, Text } from 'react-native'
-
+import { useNavigation } from '@react-navigation/native'
+// Components
 import { TempOptSettings } from '../components/TempOptSettings.js'
-// Context
+// Contexts
 import { useUnits } from '../contexts/UnitContext.js'
 
-export const Settings = ({ route }) => {
+export const Settings = () => {
   const navigation = useNavigation()
 
   useEffect(() => {

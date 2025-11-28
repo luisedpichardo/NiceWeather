@@ -1,13 +1,9 @@
 import { View, StyleSheet } from 'react-native'
 
-import { HrInfoDisplay } from './HrInfoDisplay.js'
-
-export const DayInfoDisplay = ({ infoPerHrList }) => {
+export const DayInfoDisplay = ( ) => {
   return (
     <View style={styles.dayInfo}>
-      {infoPerHrList.map((el, i) => {
-        return <HrInfoDisplay key={i} hr={el} />
-      })}
+      <Text>days</Text>
     </View>
   )
 }

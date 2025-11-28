@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-// Services
-import { weatherService } from '../services/WeatherSercive.js'
-// Context
+// Contexts
 import { useCities } from '../contexts/CityContext.js'
 import { useUnit } from '../contexts/UnitContext.js'
+// Services
+import { weatherService } from '../services/WeatherSercive.js'
 
 export const SearchBtn = ({ city }) => {
   const navigation = useNavigation()

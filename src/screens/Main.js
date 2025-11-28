@@ -6,10 +6,10 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native'
-
+// Components
 import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
-// Context
+// Contexts
 import { CitiesContext } from '../contexts/CityContext.js'
 
 class Main extends React.Component {

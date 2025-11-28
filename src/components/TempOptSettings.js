@@ -1,7 +1,11 @@
 import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-// Context
-import { useUnitUpdate, useUnitsUpdate, useUnits } from '../contexts/UnitContext.js'
+// Contexts
+import {
+  useUnitUpdate,
+  useUnitsUpdate,
+  useUnits,
+} from '../contexts/UnitContext.js'
 
 export const TempOptSettings = ({ el }) => {
   const navigation = useNavigation()
@@ -12,10 +16,12 @@ export const TempOptSettings = ({ el }) => {
   const changeUnit = () => {
     setUnit(el.value)
     // map to give a copy updating onle the value needed
-    setUnits(units.map(unit => ({
-      ...unit,
-      current: unit.value === el.value
-    })))
+    setUnits(
+      units.map(unit => ({
+        ...unit,
+        current: unit.value === el.value,
+      })),
+    )
     // navigate to main
     navigation.goBack()
   }

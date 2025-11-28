@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
-
+// Components
 import { WeatherIcon } from './WeatherIcon.js'
+// Utils
 import { roundNumber } from '../utils/roundNumber.js'
 
 export const HrInfoDisplay = ({ hr }) => {

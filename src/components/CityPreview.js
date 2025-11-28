@@ -1,13 +1,16 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-
+// Components
 import { WeatherIcon } from './WeatherIcon'
 import { Loading } from './Loading.js'
-import { BackgroundWeather } from '../screens/BackgroundWeather.js'
-import { roundNumber } from '../utils/roundNumber.js'
-import { useFetchWeatherPrev } from '../hooks/useFetchWeatherPrev.js'
-// Context
+// Contexts
 import { useUnit } from '../contexts/UnitContext.js'
+// Hooks
+import { useFetchWeatherPrev } from '../hooks/useFetchWeatherPrev.js'
+// Screens
+import { BackgroundWeather } from '../screens/BackgroundWeather.js'
+// Utils
+import { roundNumber } from '../utils/roundNumber.js'
 
 export const CityPreview = ({ el }) => {
   const navigation = useNavigation()
@@ -17,7 +20,7 @@ export const CityPreview = ({ el }) => {
     useUnit(),
   )
 
-  const openCityScreen = el => {
+  const openCityScreen = () => {
     let payload = {
       citiesList: [],
       cityData: cityInfo,
@@ -30,7 +33,7 @@ export const CityPreview = ({ el }) => {
       {loader ? (
         <Loading />
       ) : (
-        <TouchableOpacity onPress={() => openCityScreen(el)}>
+        <TouchableOpacity onPress={() => openCityScreen()}>
           <BackgroundWeather
             icon={cityInfo.weather[0].icon}
             style={styles.inWeather}
