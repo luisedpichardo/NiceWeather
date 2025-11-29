@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft:10,
-    paddingRight:10,
     marginTop: 10,
     marginBottom: 10,
   },
   cardElem: {
     justifyContent: 'center',
+    marginRight: 10,
+    marginLeft: 10,
   },
   textWhite: {
     color: 'white',
