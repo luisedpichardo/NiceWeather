@@ -9,6 +9,7 @@ import {
 // Components
 import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
+import { MyLocation } from '../components/MyLocation.js'
 // Contexts
 import { CitiesContext } from '../contexts/CityContext.js'
 
@@ -35,6 +36,7 @@ class Main extends React.Component {
         <Text style={styles.titleStyle}>Weather</Text>
         <SearchBar />
         <ScrollView style={{ flex: 1 }}>
+          <MyLocation />
           <View>
             {citiesList.map(el => {
               return <CityPreview key={`${el.city}-${el.country}`} el={el} />
