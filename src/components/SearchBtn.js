@@ -20,11 +20,13 @@ export const SearchBtn = ({ city }) => {
           if (cities.some(elem => elem.city === json.name)) {
             navigation.navigate('Weather', {
               cityData: { ...json },
+              myLoc: false,
             })
             return
           }
           navigation.navigate('Weather', {
             cityData: { ...json },
+            myLoc: false,
           })
           return
         }

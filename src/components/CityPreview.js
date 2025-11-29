@@ -24,6 +24,7 @@ export const CityPreview = ({ el }) => {
     let payload = {
       citiesList: [],
       cityData: cityInfo,
+      myLoc: false,
     }
     navigation.navigate('Weather', payload)
   }

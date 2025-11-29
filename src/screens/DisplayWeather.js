@@ -43,11 +43,17 @@ export const DisplayWeather = ({ route }) => {
     getForecastByName()
     navigation.setOptions({
       headerRight: () => (
-        <View style={styles.addRemStyle}>
-          {cities.some(elem => route.params.cityData.name === elem.city) ? (
-            <RemoveCity cityData={route.params.cityData} />
+        <View>
+          {!route.params.myLoc ? (
+            <View style={styles.addRemStyle}>
+              {cities.some(elem => route.params.cityData.name === elem.city) ? (
+                <RemoveCity cityData={route.params.cityData} />
+              ) : (
+                <AddCity cityData={route.params} />
+              )}
+            </View>
           ) : (
-            <AddCity cityData={route.params} />
+            <></>
           )}
         </View>
       ),
