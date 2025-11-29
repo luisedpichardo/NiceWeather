@@ -19,13 +19,13 @@ export const SearchBtn = ({ city }) => {
           // Check if city exists in cities context
           if (cities.some(elem => elem.city === json.name)) {
             navigation.navigate('Weather', {
-              cityData: { ...json },
+              cityData: json,
               myLoc: false,
             })
             return
           }
           navigation.navigate('Weather', {
-            cityData: { ...json },
+              cityData: json,
             myLoc: false,
           })
           return

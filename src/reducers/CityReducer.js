@@ -6,7 +6,7 @@ export const ACTIONS = {
 export const CityReducer = (cities, action) => {
   switch (action.type) {
     case ACTIONS.ADD:
-      return [action.payload.city, ...cities]
+      return [...cities, action.payload.city]
     case ACTIONS.REMOVE:
       return cities.filter(elem => elem.city !== action.payload.city)
     default:

@@ -35,7 +35,7 @@ class Main extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
         <SearchBar />
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={styles.scroll}>
           <MyLocation />
           <View>
             {citiesList.map(el => {
@@ -61,6 +61,12 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '600',
     color: 'white',
+  },
+  scroll: {
+    flex: 1,
+    margin: 15,
+    borderRadius: 25,
+    marginBottom: 40,
   },
 })
 

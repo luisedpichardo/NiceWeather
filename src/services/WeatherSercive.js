@@ -21,7 +21,6 @@ export const weatherMyLocService = async (lat, long, type, unit) => {
     let res = await fetch(
       `https://api.openweathermap.org/data/2.5/${type}?lat=${lat}&lon=${long}&appid=${Config.API_WORK_KEY}&units=${unit}`,
     )
-    console.log(res)
     return res.json()
   } catch {
     return {

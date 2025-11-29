@@ -9,8 +9,8 @@ export const AddCity = ({ cityData }) => {
   const dispatchCities = useCitiesUpdate()
   const addCityToList = () => {
     let city = {
-      city: cityData.cityData.name,
-      country: cityData.cityData.sys.country,
+      city: cityData.name,
+      country: cityData.sys.country,
     }
     // Call reducer
     dispatchCities({

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { Alert, View } from 'react-native'
 // Components
 import { Loading } from './Loading.js'
 import { MyCityPrev } from './MyCityPrev.js'
@@ -18,7 +18,7 @@ export const MyLocation = () => {
         return res
       })
       .catch(error => {
-        console.log(error)
+        Alert.alert(error.message)
       })
   }, [])
 

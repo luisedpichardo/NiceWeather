@@ -22,7 +22,6 @@ export const CityPreview = ({ el }) => {
 
   const openCityScreen = () => {
     let payload = {
-      citiesList: [],
       cityData: cityInfo,
       myLoc: false,
     }
@@ -76,7 +75,10 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 10,
+    paddingLeft:10,
+    paddingRight:10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   cardElem: {
     justifyContent: 'center',

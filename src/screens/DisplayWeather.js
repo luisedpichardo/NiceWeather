@@ -49,7 +49,7 @@ export const DisplayWeather = ({ route }) => {
               {cities.some(elem => route.params.cityData.name === elem.city) ? (
                 <RemoveCity cityData={route.params.cityData} />
               ) : (
-                <AddCity cityData={route.params} />
+                <AddCity cityData={route.params.cityData} />
               )}
             </View>
           ) : (
