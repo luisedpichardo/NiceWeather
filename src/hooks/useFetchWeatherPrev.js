@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Alert } from 'react-native'
 // Services
 import { weatherService } from '../services/WeatherSercive'
 
