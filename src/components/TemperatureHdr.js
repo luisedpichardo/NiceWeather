@@ -1,12 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native'
 // Utils
 import { roundNumber } from '../utils/roundNumber'
+import { useCallback } from 'react'
 
 export const TemperatureHdr = ({ weatherInfo }) => {
+  const mainTemp = useCallback(
+    temp => {
+      return roundNumber(temp)
+    },
+    [weatherInfo],
+  )
+
   return (
     <View style={styles.cityCont}>
       <Text style={styles.cityName}>{weatherInfo.name}</Text>
-      <Text style={styles.cityTemp}>{roundNumber(weatherInfo.main.temp)}°</Text>
+      <Text style={styles.cityTemp}>{mainTemp(weatherInfo.main.temp)}°</Text>
       <Text style={styles.cityHighLow}>
         {weatherInfo.weather[0].description}
       </Text>

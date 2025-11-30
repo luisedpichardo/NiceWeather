@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 // Components
 import { DayInfoDisplay } from './DayInfoDisplay.js'
@@ -5,7 +6,10 @@ import { DayInfoDisplay } from './DayInfoDisplay.js'
 import { calculateDays } from '../utils/calculateDays.js'
 
 export const TempDayDisplay = ({ infoPerHrList }) => {
-  const daysOfWeek = calculateDays(infoPerHrList)
+  const daysOfWeek = useMemo(
+    () => calculateDays(infoPerHrList),
+    [infoPerHrList],
+  )
 
   return (
     <View style={styles.dayInfo}>
