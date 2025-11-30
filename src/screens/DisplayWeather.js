@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert, ScrollView, Text } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 // Components
@@ -7,6 +7,7 @@ import { TempHrDisplay } from '../components/TempHrDisplay.js'
 import { AddCity } from '../components/AddCity.js'
 import { RemoveCity } from '../components/RemoveCity.js'
 import { Loading } from '../components/Loading.js'
+import { TempDayDisplay } from '../components/TempDayDisplay.js'
 // Contexts
 import { useUnit } from '../contexts/UnitContext.js'
 import { useCities } from '../contexts/CityContext.js'
@@ -65,17 +66,23 @@ export const DisplayWeather = ({ route }) => {
       {loader ? (
         <Loading />
       ) : (
-        <BackgroundWeather icon={route.params.cityData.weather[0].icon}>
+        <BackgroundWeather
+          icon={route.params.cityData.weather[0].icon}
+          style={{ flex: 1 }}
+        >
           <View style={styles.infoContainer}>
-            <TemperatureHdr
-              style={{ felx: 9 }}
-              weatherInfo={route.params.cityData}
-            />
-            <ScrollView style={{ flex: 30 }}>
-              <TempHrDisplay infoPerHrList={forecastData.list} />
-            </ScrollView>
-            <View>
-              <Text>Hello there</Text>
+            <View style={{ flex: 4, borderRadius: 25 }}>
+              <TemperatureHdr weatherInfo={route.params.cityData} />
+            </View>
+            <View style={{ flex: 3 }}>
+              <ScrollView horizontal={true} style={{ borderRadius: 25 }}>
+                <TempDayDisplay infoPerHrList={forecastData.list} />
+              </ScrollView>
+            </View>
+            <View style={{ flex: 10, borderRadius: 25 }}>
+              <ScrollView style={{ marginTop: 10, marginBottom: 10 }} >
+                <TempHrDisplay infoPerHrList={forecastData.list} />
+              </ScrollView>
             </View>
           </View>
         </BackgroundWeather>
