@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 // Components
-import { TempOptSettings } from '../components/TempOptSettings.js'
+import { TempOptSettings } from '../components/TempOptSettings.tsx'
 // Contexts
 import { useUnits } from '../contexts/UnitContext.js'
 

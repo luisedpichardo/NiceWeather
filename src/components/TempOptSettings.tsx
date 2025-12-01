@@ -6,8 +6,17 @@ import {
   useUnitsUpdate,
   useUnits,
 } from '../contexts/UnitContext.js'
+// Types
+type El = {
+  current: boolean,
+  textUI: string,
+  value: string,
+}
+type Props = {
+  el: El,
+}
 
-export const TempOptSettings = ({ el }) => {
+export const TempOptSettings = ({ el } : Props) => {
   const navigation = useNavigation()
   const setUnit = useUnitUpdate()
   const setUnits = useUnitsUpdate()
@@ -17,7 +26,7 @@ export const TempOptSettings = ({ el }) => {
     setUnit(el.value)
     // map to give a copy updating onle the value needed
     setUnits(
-      units.map(unit => ({
+      units.map((unit : El) => ({
         ...unit,
         current: unit.value === el.value,
       })),

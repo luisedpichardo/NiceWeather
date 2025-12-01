@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 // Components
-import { WeatherIcon } from './WeatherIcon'
-import { Loading } from './Loading.js'
+import { WeatherIcon } from './WeatherIcon.tsx'
+import { Loading } from './Loading.tsx'
 // Contexts
 import { useUnit } from '../contexts/UnitContext.js'
 // Hooks

@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native'
 // Components
-import { SearchBar } from '../components/SearchBar.js'
 import { CityPreview } from '../components/CityPreview.js'
-import { MyLocation } from '../components/MyLocation.js'
+import { MyLocation } from '../components/MyLocation.tsx'
+import { SearchBar } from '../components/SearchBar.tsx'
 // Contexts
 import { CitiesContext } from '../contexts/CityContext.js'
 

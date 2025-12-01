@@ -1,10 +1,53 @@
 import { View, Text, StyleSheet } from 'react-native'
 // Components
-import { WeatherIcon } from './WeatherIcon.js'
+import { WeatherIcon } from './WeatherIcon.tsx'
 // Utils
 import { roundNumber } from '../utils/roundNumber.js'
+// Types
+type Clouds = {
+  all: number
+}
+type Main = {
+  feels_like: number,
+  grnd_level: number,
+  humidity: number,
+  pressure: number,
+  sea_level: number,
+  temp: number,
+  temp_kf: number,
+  temp_max: number,
+  temp_min: number,
+}
+type Sys = {
+  pod: string,
+}
+type Weather = {
+  description: string,
+  icon: string,
+  id: number,
+  main: string,
+}
+type Wind = {
+  deg: number,
+  gust: number,
+  speed: number,
+}
+type Hr = {
+  clouds: Clouds,
+  dt: number,
+  dt_txt: number,
+  main: Main,
+  pop: number,
+  sys: Sys,
+  visibility: number,
+  weather: Array<Weather>,
+  wind: Wind,
+}
+type Props = {
+  hr: Hr
+}
 
-export const HrInfoDisplay = ({ hr }) => {
+export const HrInfoDisplay = ({ hr } : Props) => {
   return (
     <View style={styles.hrInfo}>
       <View style={styles.tempInfo}>

@@ -1,8 +1,19 @@
 import { View, StyleSheet, Text } from 'react-native'
 // Utils
 import { roundNumber } from '../utils/roundNumber'
+// Types
+type Day = {
+  day: number,
+  max: number,
+  min: number,
+  month: number,
+  weekDay: string,
+}
+type Props = {
+  day: Day
+}
 
-export const DayInfoDisplay = ({ day }) => {
+export const DayInfoDisplay = ({ day } : Props) => {
   return (
     <View style={styles.dayInfo}>
       <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{day.weekDay}</Text>
