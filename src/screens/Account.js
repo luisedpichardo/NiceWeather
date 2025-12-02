@@ -11,29 +11,47 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { signOut, getAuth } from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 
 export const Account = () => {
   const navigation = useNavigation()
   const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [newFirstName, setNewFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [newLastName, setNewLastName] = useState('')
   const [age, setAge] = useState('')
-  // const [imageUri, setImageUri] = useState("../../assets/account_pp_default.jpg")
+  const [newAge, setNewAge] = useState('')
+  const [imageUri, setImageUri] = useState('')
 
   const logOut = () => {
     signOut(getAuth())
   }
 
   const updateAccount = () => {
-    if (newFirstName && newLastName && age)
-      firestore().collection('users').doc(getAuth().currentUser.email).set({
+    if (newFirstName) {
+      firestore().collection('users').doc(getAuth().currentUser.email).update({
         email: getAuth().currentUser.email,
         firstName: newFirstName,
+      })
+    }
+    if (newLastName) {
+      firestore().collection('users').doc(getAuth().currentUser.email).update({
+        email: getAuth().currentUser.email,
         lastName: newLastName,
+      })
+    }
+    if (newAge) {
+      firestore().collection('users').doc(getAuth().currentUser.email).update({
+        email: getAuth().currentUser.email,
+        age: newAge,
+      })
+    } else if (age) {
+      firestore().collection('users').doc(getAuth().currentUser.email).update({
+        email: getAuth().currentUser.email,
         age: age,
       })
-    else Alert.alert('All field must be filled')
+    }
+    // Missing Update Image
   }
 
   useEffect(() => {
@@ -54,15 +72,56 @@ export const Account = () => {
       .then(userData => {
         setFirstName(userData.data().firstName)
         setLastName(userData.data().lastName)
+        if (userData.data().age) setAge(userData.data().age)
       })
   }, [navigation])
+
+  const openLibrary = async () => {
+    try {
+      const result = await launchImageLibrary({
+        mediaType: 'photo',
+        selectionLimit: 1,
+      })
+      if (result.errorCode) {
+        Alert.alert('Error', result.errorMessage)
+      } else if (result.assets && result.assets.length > 0) {
+        setImageUri(result.assets[0].uri)
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to launch library.')
+    }
+  }
+
+  const openCamera = async () => {
+    try {
+      const result = await launchCamera({
+        mediaType: 'photo',
+        quality: 0.5,
+        cameraType: 'back',
+        saveToPhotos: true,
+      })
+      if (result.errorCode) {
+        Alert.alert('Error', result.errorMessage)
+      } else if (result.assets && result.assets.length > 0) {
+        setImageUri(result.assets[0].uri)
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to launch camera.')
+    }
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.form}>
         <View style={{ flexDirection: 'row' }}>
           <Image
-            source={require('../../assets/account_pp_default.jpg')}
+            source={
+              imageUri
+                ? {
+                    uri: imageUri,
+                  }
+                : require('../../assets/account_pp_default.jpg')
+            }
             style={styles.imgStyle}
           />
           <View
@@ -73,10 +132,10 @@ export const Account = () => {
             }}
           >
             <Text>Update Image</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openLibrary}>
               <Text>Choose from library</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openCamera}>
               <Text>Take a picture</Text>
             </TouchableOpacity>
           </View>
@@ -98,9 +157,9 @@ export const Account = () => {
           />
           <Text style={styles.txt}>Age</Text>
           <TextInput
-            placeholder="Age"
-            value={age}
-            onChangeText={setAge}
+            placeholder={age}
+            value={newAge}
+            onChangeText={setNewAge}
             keyboardType="numeric"
             style={styles.input}
           />
