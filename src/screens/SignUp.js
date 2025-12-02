@@ -12,11 +12,14 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
 } from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 export const SignUp = () => {
   const navigation = useNavigation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
 
   const goToLogIn = () => {
     navigation.goBack()
@@ -26,7 +29,12 @@ export const SignUp = () => {
     try {
       await createUserWithEmailAndPassword(getAuth(), email, password)
         .then(() => {
-					getAuth().signOut()
+          firestore().collection('users').doc(getAuth().currentUser.email).set({
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+          })
+          getAuth().signOut()
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
@@ -46,9 +54,22 @@ export const SignUp = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up Page</Text>
       <View style={styles.form}>
         <View style={styles.fields}>
+          <Text>First Name</Text>
+          <TextInput
+            placeholder="First Name"
+            value={firstName}
+            onChangeText={setFirstName}
+            style={styles.input}
+          />
+          <Text>Last Name</Text>
+          <TextInput
+            placeholder="Last Name"
+            value={lastName}
+            onChangeText={setLastName}
+            style={styles.input}
+          />
           <Text>Type your email</Text>
           <TextInput
             placeholder="Email"
@@ -87,6 +108,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'gray',
     padding: 30,
+    paddingTop: '30%',
+    paddingBottom: '30%',
   },
   title: {
     flex: 1,
@@ -97,7 +120,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 25,
     padding: 30,
-    marginBottom: 60,
   },
   fields: {
     flex: 3,

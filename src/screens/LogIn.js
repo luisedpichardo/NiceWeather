@@ -26,6 +26,7 @@ export const LogIn = () => {
     try {
       await signInWithEmailAndPassword(getAuth(), email, password)
         .then(() => {
+					// Add a notification that is logged in
           console.log('logged in')
         })
         .catch(error => {
@@ -46,7 +47,6 @@ export const LogIn = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Log In Page</Text>
       <View style={styles.form}>
         <View style={styles.fields}>
           <Text>Email</Text>
@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'gray',
     padding: 30,
+    paddingTop: '30%',
+    paddingBottom: '30%',
   },
   title: {
     flex: 1,
@@ -97,7 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 25,
     padding: 30,
-    marginBottom: 60,
   },
   fields: {
     flex: 3,
