@@ -19,6 +19,7 @@ import { DisplayWeather } from './src/screens/DisplayWeather.js'
 import { Settings } from './src/screens/Settings.js'
 import { SignUp } from './src/screens/SignUp.js'
 import { LogIn} from './src/screens/LogIn.js'
+import { Account } from './src/screens/Account.js'
 // Providers
 import { UnitProvider } from './src/contexts/UnitContext.js'
 import { CitiesProvider } from './src/contexts/CityContext.js'
@@ -44,6 +45,7 @@ function MyStack() {
       <Stack.Screen name="Main" component={Main} />
       <Stack.Screen name="Weather" component={DisplayWeather} />
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Account" component={Account} />
     </Stack.Navigator>
   );
 }

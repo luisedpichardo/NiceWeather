@@ -23,16 +23,12 @@ export const SignUp = () => {
   }
 
   const createUser = async () => {
-    console.log(email, password)
     try {
       await createUserWithEmailAndPassword(getAuth(), email, password)
         .then(() => {
-          console.log('User account created & signed in!')
 					getAuth().signOut()
-					navigation.goBack()
         })
         .catch(error => {
-          console.log(error)
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('That email address is already in use!')
           }
@@ -44,7 +40,7 @@ export const SignUp = () => {
           Alert.alert(error)
         })
     } catch {
-      console.log('error')
+      Alert.alert('Error creating user')
     }
   }
 

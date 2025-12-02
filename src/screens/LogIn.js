@@ -4,9 +4,14 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
+import {
+  signInWithEmailAndPassword,
+  getAuth,
+} from '@react-native-firebase/auth'
 
 export const LogIn = () => {
   const navigation = useNavigation()
@@ -17,8 +22,26 @@ export const LogIn = () => {
     navigation.navigate('Sign Up')
   }
 
-  const validateInput = e => {
-    console.log(e, email, password)
+  const login = async () => {
+    try {
+      await signInWithEmailAndPassword(getAuth(), email, password)
+        .then(() => {
+          console.log('logged in')
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            Alert.alert('That email address is already in use!')
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            Alert.alert('That email address is invalid!')
+          }
+
+          Alert.alert(error)
+        })
+    } catch (e) {
+      Alert.alert('Error logging user')
+    }
   }
 
   return (
@@ -32,7 +55,7 @@ export const LogIn = () => {
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
-						style={styles.input}
+            style={styles.input}
           />
           <Text>Password</Text>
           <TextInput
@@ -40,10 +63,10 @@ export const LogIn = () => {
             value={password}
             onChangeText={setPassword}
             secureTextEntry={true}
-						style={styles.input}
+            style={styles.input}
           />
           <View style={styles.btnStyle}>
-            <TouchableOpacity onPress={e => validateInput(e)}>
+            <TouchableOpacity onPress={login}>
               <Text>Log In</Text>
             </TouchableOpacity>
           </View>
@@ -90,6 +113,6 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 2,
-		borderRadius: 10,
+    borderRadius: 10,
   },
 })
