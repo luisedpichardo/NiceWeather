@@ -110,6 +110,10 @@ export const Account = () => {
     }
   }
 
+  const openWebView = () => {
+    navigation.navigate('WebView')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.form}>
@@ -140,6 +144,15 @@ export const Account = () => {
             </TouchableOpacity>
           </View>
         </View>
+
+        <TouchableOpacity
+          onPress={openWebView}
+          style={{ alignItems: 'center', marginTop: 10 }}
+        >
+          <Text>Need inspiration for a profile picture?</Text>
+          <Text>Click here to look for images</Text>
+        </TouchableOpacity>
+
         <View style={styles.fields}>
           <Text style={styles.txt}>First Name</Text>
           <TextInput
