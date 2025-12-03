@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
@@ -20,13 +21,15 @@ export const LogIn = () => {
   };
 
   const login = async () => {
+    /** TODO
+     * Make notifications instead of alerts
+     */
     signInWithEmailAndPasswordService(email, password)
       .then(() => {
-        // make this a notification
-        console.log('succes');
+        Alert.alert('Welcome!')
       })
       .catch(err => {
-        console.log('Error: ', err);
+        Alert.alert('Error: ', err.message);
       });
   };
 

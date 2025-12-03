@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
@@ -21,12 +22,15 @@ export const SignUp = () => {
   };
 
   const createUser = () => {
+    /** TODO
+     * Make notifications instead of alerts
+     */
     createUserWithEmailAndPasswordService(email, password, firstName, lastName)
       .then(() => {
-        console.log('succes');
+        Alert.alert('Created User Successful')
       })
       .catch(err => {
-        console.log('Error: ', err);
+        Alert.alert('Error: ', err.message)
       });
   };
 

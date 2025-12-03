@@ -5,7 +5,6 @@ import {
   signOut,
 } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { Alert } from 'react-native';
 
 // Create User
 export const createUserWithEmailAndPasswordService = async (
@@ -32,11 +31,11 @@ export const createUserWithEmailAndPasswordService = async (
     await getAuth().signOut();
   } catch (error) {
     if (error.code === 'auth/email-already-in-use') {
-      Alert.alert('Email in Use', 'That email address is already in use!');
+      throw Error('Email in Use', 'That email address is already in use!')
     } else if (error.code === 'auth/invalid-email') {
-      Alert.alert('Invalid Email', 'That email address is invalid!');
+      throw Error('Invalid Email', 'That email address is invalid!')
     } else {
-      Alert.alert('Error', error.message ?? String(error));
+      throw Error('Error', error.message ?? String(error))
     }
   }
 };
@@ -47,7 +46,7 @@ export const signInWithEmailAndPasswordService = async (email, password) => {
     // Log in
     await signInWithEmailAndPassword(getAuth(), email, password);
   } catch (e) {
-    Alert.alert('Error logging user: ', e.message);
+    throw Error(e.message)
   }
 };
 
