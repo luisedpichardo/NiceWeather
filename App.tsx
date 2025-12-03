@@ -60,6 +60,7 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
   const [user, setUser] = React.useState(null);
 
+  // This will take car of all sign in and out
   function handleAuthStatehange(user: any) {
     setUser(user);
   }

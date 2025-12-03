@@ -4,14 +4,11 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import {
-  signInWithEmailAndPassword,
-  getAuth,
-} from '@react-native-firebase/auth';
+// Services
+import { signInWithEmailAndPasswordService } from '../services/FirebaseService.js';
 
 export const LogIn = () => {
   const navigation = useNavigation();
@@ -23,26 +20,14 @@ export const LogIn = () => {
   };
 
   const login = async () => {
-    try {
-      await signInWithEmailAndPassword(getAuth(), email, password)
-        .then(() => {
-          // Add a notification that is logged in
-          console.log('logged in');
-        })
-        .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('That email address is already in use!');
-          }
-
-          if (error.code === 'auth/invalid-email') {
-            Alert.alert('That email address is invalid!');
-          }
-
-          Alert.alert('error', error.message);
-        });
-    } catch (e) {
-      Alert.alert('Error logging user');
-    }
+    signInWithEmailAndPasswordService(email, password)
+      .then(() => {
+        // make this a notification
+        console.log('succes');
+      })
+      .catch(err => {
+        console.log('Error: ', err);
+      });
   };
 
   return (

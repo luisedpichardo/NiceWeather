@@ -1,11 +1,14 @@
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
+  signOut,
 } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { Alert } from 'react-native';
 
-export const firstSignUpWithEmailAndPassword = async (
+// Create User
+export const createUserWithEmailAndPasswordService = async (
   email,
   password,
   firstName,
@@ -36,4 +39,19 @@ export const firstSignUpWithEmailAndPassword = async (
       Alert.alert('Error', error.message ?? String(error));
     }
   }
+};
+
+// Log in user
+export const signInWithEmailAndPasswordService = async (email, password) => {
+  try {
+    // Log in
+    await signInWithEmailAndPassword(getAuth(), email, password);
+  } catch (e) {
+    Alert.alert('Error logging user: ', e.message);
+  }
+};
+
+// Sign out User
+export const signOutService = () => {
+  signOut(getAuth());
 };

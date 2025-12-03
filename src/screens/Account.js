@@ -9,9 +9,11 @@ import {
   Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { signOut, getAuth } from '@react-native-firebase/auth';
+import { getAuth } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+// Service
+import { signOutService } from '../services/FirebaseService';
 
 export const Account = () => {
   const navigation = useNavigation();
@@ -22,10 +24,6 @@ export const Account = () => {
   const [age, setAge] = useState('');
   const [newAge, setNewAge] = useState('');
   const [imageUri, setImageUri] = useState('');
-
-  const logOut = () => {
-    signOut(getAuth());
-  };
 
   const updateAccount = () => {
     if (newFirstName) {
@@ -59,7 +57,7 @@ export const Account = () => {
       headerTintColor: 'white',
       headerRight: () => (
         <View>
-          <TouchableOpacity onPress={logOut}>
+          <TouchableOpacity onPress={signOutService}>
             <Text style={{ color: 'white' }}>Log Out</Text>
           </TouchableOpacity>
         </View>

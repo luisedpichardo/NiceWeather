@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { firstSignUpWithEmailAndPassword } from '../services/FirebaseService.js';
+import { createUserWithEmailAndPasswordService } from '../services/FirebaseService.js';
 
 export const SignUp = () => {
   const navigation = useNavigation();
@@ -21,7 +21,7 @@ export const SignUp = () => {
   };
 
   const createUser = () => {
-    firstSignUpWithEmailAndPassword(email, password, firstName, lastName)
+    createUserWithEmailAndPasswordService(email, password, firstName, lastName)
       .then(() => {
         console.log('succes');
       })
