@@ -1,15 +1,15 @@
-import { StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // Contexts
-import { useCities } from '../contexts/CityContext.js'
-import { useUnit } from '../contexts/UnitContext.js'
+import { useCities } from '../contexts/CityContext.js';
+import { useUnit } from '../contexts/UnitContext.js';
 // Services
-import { weatherService } from '../services/WeatherSercive.js'
+import { weatherService } from '../services/WeatherSercive.js';
 
 export const SearchBtn = ({ city }) => {
-  const navigation = useNavigation()
-  const unit = useUnit()
-  const cities = useCities()
+  const navigation = useNavigation();
+  const unit = useUnit();
+  const cities = useCities();
 
   const lookCity = () => {
     weatherService(city, 'weather', unit)
@@ -21,22 +21,22 @@ export const SearchBtn = ({ city }) => {
             navigation.navigate('Weather', {
               cityData: json,
               myLoc: false,
-            })
-            return
+            });
+            return;
           }
           navigation.navigate('Weather', {
-              cityData: json,
+            cityData: json,
             myLoc: false,
-          })
-          return
+          });
+          return;
         }
         // Other wise throw an error
-        throw Error(json.message)
+        throw Error(json.message);
       })
       .catch(error => {
-        Alert.alert(error.message)
-      })
-  }
+        Alert.alert(error.message);
+      });
+  };
 
   return (
     <TouchableOpacity
@@ -46,12 +46,12 @@ export const SearchBtn = ({ city }) => {
     >
       <Text>Search</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   btn: {
     justifyContent: 'center',
     marginRight: 10,
   },
-})
+});

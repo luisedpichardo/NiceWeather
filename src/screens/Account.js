@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,52 +7,52 @@ import {
   TextInput,
   Image,
   Alert,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { signOut, getAuth } from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore'
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { signOut, getAuth } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 export const Account = () => {
-  const navigation = useNavigation()
-  const [firstName, setFirstName] = useState('')
-  const [newFirstName, setNewFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [newLastName, setNewLastName] = useState('')
-  const [age, setAge] = useState('')
-  const [newAge, setNewAge] = useState('')
-  const [imageUri, setImageUri] = useState('')
+  const navigation = useNavigation();
+  const [firstName, setFirstName] = useState('');
+  const [newFirstName, setNewFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [newLastName, setNewLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [newAge, setNewAge] = useState('');
+  const [imageUri, setImageUri] = useState('');
 
   const logOut = () => {
-    signOut(getAuth())
-  }
+    signOut(getAuth());
+  };
 
   const updateAccount = () => {
     if (newFirstName) {
       firestore().collection('users').doc(getAuth().currentUser.email).update({
         email: getAuth().currentUser.email,
         firstName: newFirstName,
-      })
+      });
     }
     if (newLastName) {
       firestore().collection('users').doc(getAuth().currentUser.email).update({
         email: getAuth().currentUser.email,
         lastName: newLastName,
-      })
+      });
     }
     if (newAge) {
       firestore().collection('users').doc(getAuth().currentUser.email).update({
         email: getAuth().currentUser.email,
         age: newAge,
-      })
+      });
     } else if (age) {
       firestore().collection('users').doc(getAuth().currentUser.email).update({
         email: getAuth().currentUser.email,
         age: age,
-      })
+      });
     }
     // Missing Update Image
-  }
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -64,33 +64,33 @@ export const Account = () => {
           </TouchableOpacity>
         </View>
       ),
-    })
+    });
     firestore()
       .collection('users')
       .doc(getAuth().currentUser.email)
       .get()
       .then(userData => {
-        setFirstName(userData.data().firstName)
-        setLastName(userData.data().lastName)
-        if (userData.data().age) setAge(userData.data().age)
-      })
-  }, [navigation])
+        setFirstName(userData.data().firstName);
+        setLastName(userData.data().lastName);
+        if (userData.data().age) setAge(userData.data().age);
+      });
+  }, [navigation]);
 
   const openLibrary = async () => {
     try {
       const result = await launchImageLibrary({
         mediaType: 'photo',
         selectionLimit: 1,
-      })
+      });
       if (result.errorCode) {
-        Alert.alert('Error', result.errorMessage)
+        Alert.alert('Error', result.errorMessage);
       } else if (result.assets && result.assets.length > 0) {
-        setImageUri(result.assets[0].uri)
+        setImageUri(result.assets[0].uri);
       }
     } catch (error) {
-      Alert.alert('Error', 'Failed to launch library.')
+      Alert.alert('Error', 'Failed to launch library.');
     }
-  }
+  };
 
   const openCamera = async () => {
     try {
@@ -99,20 +99,20 @@ export const Account = () => {
         quality: 0.5,
         cameraType: 'back',
         saveToPhotos: true,
-      })
+      });
       if (result.errorCode) {
-        Alert.alert('Error', result.errorMessage)
+        Alert.alert('Error', result.errorMessage);
       } else if (result.assets && result.assets.length > 0) {
-        setImageUri(result.assets[0].uri)
+        setImageUri(result.assets[0].uri);
       }
     } catch (error) {
-      Alert.alert('Error', 'Failed to launch camera.')
+      Alert.alert('Error', 'Failed to launch camera.');
     }
-  }
+  };
 
   const openWebView = () => {
-    navigation.navigate('WebView')
-  }
+    navigation.navigate('WebView');
+  };
 
   return (
     <View style={styles.container}>
@@ -184,8 +184,8 @@ export const Account = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -222,4 +222,4 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     overflow: 'hidden',
   },
-})
+});

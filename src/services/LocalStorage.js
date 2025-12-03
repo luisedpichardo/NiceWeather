@@ -43,8 +43,6 @@
 //   }
 // }
 
-
-
 // export const clearStorage = async () => {
 // try {
 //     const value = await AsyncStorage.getAllKeys()
@@ -54,4 +52,3 @@
 //     return null
 //   }
 // }
-

@@ -1,47 +1,47 @@
-import { View, StyleSheet, Alert, ScrollView } from 'react-native'
-import { useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { View, StyleSheet, Alert, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 // Components
-import { TemperatureHdr } from '../components/TemperatureHdr.tsx'
-import { TempHrDisplay } from '../components/TempHrDisplay.tsx'
-import { AddCity } from '../components/AddCity.tsx'
-import { RemoveCity } from '../components/RemoveCity.tsx'
-import { Loading } from '../components/Loading.tsx'
-import { TempDayDisplay } from '../components/TempDayDisplay.tsx'
+import { TemperatureHdr } from '../components/TemperatureHdr.tsx';
+import { TempHrDisplay } from '../components/TempHrDisplay.tsx';
+import { AddCity } from '../components/AddCity.tsx';
+import { RemoveCity } from '../components/RemoveCity.tsx';
+import { Loading } from '../components/Loading.tsx';
+import { TempDayDisplay } from '../components/TempDayDisplay.tsx';
 // Contexts
-import { useUnit } from '../contexts/UnitContext.js'
-import { useCities } from '../contexts/CityContext.js'
+import { useUnit } from '../contexts/UnitContext.js';
+import { useCities } from '../contexts/CityContext.js';
 // Screens
-import { BackgroundWeather } from './BackgroundWeather.js'
+import { BackgroundWeather } from './BackgroundWeather.js';
 // Services
-import { weatherService } from '../services/WeatherSercive.js'
+import { weatherService } from '../services/WeatherSercive.js';
 
 export const DisplayWeather = ({ route }) => {
-  const navigation = useNavigation()
-  const [loader, setLoader] = useState(true)
-  const [forecastData, setForecastData] = useState(null)
-  const unit = useUnit()
-  const cities = useCities()
+  const navigation = useNavigation();
+  const [loader, setLoader] = useState(true);
+  const [forecastData, setForecastData] = useState(null);
+  const unit = useUnit();
+  const cities = useCities();
 
   const getForecastByName = () => {
     weatherService(route.params.cityData.name, 'forecast', unit)
       .then(json => {
         if (json.cod === '200') {
-          setForecastData(json)
-          setLoader(false)
-          return
+          setForecastData(json);
+          setLoader(false);
+          return;
         }
         // Other wise throw an error
-        throw Error(json.message)
+        throw Error(json.message);
       })
       .catch(error => {
-        Alert.alert(error.message)
-        navigation.goBack()
-      })
-  }
+        Alert.alert(error.message);
+        navigation.goBack();
+      });
+  };
 
   useEffect(() => {
-    getForecastByName()
+    getForecastByName();
     navigation.setOptions({
       headerRight: () => (
         <View>
@@ -58,8 +58,8 @@ export const DisplayWeather = ({ route }) => {
           )}
         </View>
       ),
-    })
-  }, [navigation])
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -80,7 +80,7 @@ export const DisplayWeather = ({ route }) => {
               </ScrollView>
             </View>
             <View style={{ flex: 10, borderRadius: 25 }}>
-              <ScrollView style={{ marginTop: 10, marginBottom: 10 }} >
+              <ScrollView style={{ marginTop: 10, marginBottom: 10 }}>
                 <TempHrDisplay infoPerHrList={forecastData.list} />
               </ScrollView>
             </View>
@@ -88,8 +88,8 @@ export const DisplayWeather = ({ route }) => {
         </BackgroundWeather>
       )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
     padding: 10,
     alignSelf: 'flex-end',
   },
-})
+});

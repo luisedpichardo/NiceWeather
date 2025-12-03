@@ -1,10 +1,10 @@
-import { Image } from 'react-native'
+import { Image } from 'react-native';
 // Types
 type Props = {
-  icon: string
-}
+  icon: string;
+};
 
-export const WeatherIcon = ({ icon } : Props) => {
+export const WeatherIcon = ({ icon }: Props) => {
   return (
     <Image
       source={{
@@ -13,5 +13,5 @@ export const WeatherIcon = ({ icon } : Props) => {
       style={{ width: 50, height: 50 }}
       resizeMode="contain"
     />
-  )
-}
+  );
+};

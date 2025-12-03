@@ -1,31 +1,31 @@
-import { useEffect, useState } from 'react'
-import { Alert } from 'react-native'
+import { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 // Services
-import { weatherService } from '../services/WeatherSercive'
+import { weatherService } from '../services/WeatherSercive';
 
 export function useFetchWeatherPrev(name, type, unit) {
-  const [loader, setLoader] = useState(true)
-  const [cityInfo, setCityInfo] = useState(null)
+  const [loader, setLoader] = useState(true);
+  const [cityInfo, setCityInfo] = useState(null);
 
   useEffect(() => {
     weatherService(name, type, unit)
       .then(json => {
         // Check if success
         if (json.cod === 200) {
-          setCityInfo(json)
-          setLoader(false)
-          return
+          setCityInfo(json);
+          setLoader(false);
+          return;
         }
         // Other wise throw an error
-        throw Error(json.message)
+        throw Error(json.message);
       })
       .catch(error => {
-        Alert.alert(error.message)
-      })
-  }, [name, type, unit])
+        Alert.alert(error.message);
+      });
+  }, [name, type, unit]);
 
   return {
     cityInfo: cityInfo,
     loader: loader,
-  }
+  };
 }

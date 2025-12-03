@@ -1,68 +1,68 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native';
 // Utils
-import { roundNumber } from '../utils/roundNumber'
-import { useCallback } from 'react'
+import { roundNumber } from '../utils/roundNumber';
+import { useCallback } from 'react';
 // Types
 type Clouds = {
-  all: number,
-}
+  all: number;
+};
 type Coord = {
-  lat: number,
-  lon: number,
-}
+  lat: number;
+  lon: number;
+};
 type Main = {
-  feels_like:number,
-  grnd_level:number,
-  humidity:number,
-  pressure:number,
-  sea_level:number,
-  temp:number,
-  temp_max:number,
-  temp_min:number,
-}
+  feels_like: number;
+  grnd_level: number;
+  humidity: number;
+  pressure: number;
+  sea_level: number;
+  temp: number;
+  temp_max: number;
+  temp_min: number;
+};
 type Sys = {
-  country: string,
-  id: number,
-  sunrise: number,
-  sunset: number,
-  type: number,
-}
+  country: string;
+  id: number;
+  sunrise: number;
+  sunset: number;
+  type: number;
+};
 type Weather = {
-  description: string,
-  icon: string,
-  id: number,
-  main: string,
-}
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
+};
 type Wind = {
-  deg: number,
-  speed: number,
-}
+  deg: number;
+  speed: number;
+};
 type WeatherInfo = {
-  base: string,
-  clouds: Clouds,
-  cod: number,
-  coord: Coord,
-  dt: number,
-  id: number,
-  main: Main,
-  name: string,
-  sys: Sys,
-  timezone: string,
-  visibility: number,
-  weather: Array<Weather>,
-  wind: Wind,
-}
+  base: string;
+  clouds: Clouds;
+  cod: number;
+  coord: Coord;
+  dt: number;
+  id: number;
+  main: Main;
+  name: string;
+  sys: Sys;
+  timezone: string;
+  visibility: number;
+  weather: Array<Weather>;
+  wind: Wind;
+};
 type Props = {
-  weatherInfo: WeatherInfo,
-}
+  weatherInfo: WeatherInfo;
+};
 
-export const TemperatureHdr = ({ weatherInfo } : Props) => {
+export const TemperatureHdr = ({ weatherInfo }: Props) => {
   const mainTemp = useCallback(
-    (temp : number) => {
-      return roundNumber(temp)
+    (temp: number) => {
+      return roundNumber(temp);
     },
     [weatherInfo],
-  )
+  );
 
   return (
     <View style={styles.cityCont}>
@@ -79,8 +79,8 @@ export const TemperatureHdr = ({ weatherInfo } : Props) => {
         {roundNumber(weatherInfo.main.temp_min)}°
       </Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   cityCont: {
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
   },
-})
+});

@@ -1,32 +1,30 @@
-import { useEffect } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useEffect } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // Components
-import { TempOptSettings } from '../components/TempOptSettings.tsx'
+import { TempOptSettings } from '../components/TempOptSettings.tsx';
 // Contexts
-import { useUnits } from '../contexts/UnitContext.js'
+import { useUnits } from '../contexts/UnitContext.js';
 
 export const Settings = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const goToAccount = () => {
-    navigation.navigate('Account')
-  }
+    navigation.navigate('Account');
+  };
 
   useEffect(() => {
     navigation.setOptions({
       headerTintColor: 'white',
       headerRight: () => (
-            <View>
-              <TouchableOpacity onPress={goToAccount}>
-                <Text style={{color:'white'}}>
-                  Account
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ),
-    })
-  }, [navigation])
+        <View>
+          <TouchableOpacity onPress={goToAccount}>
+            <Text style={{ color: 'white' }}>Account</Text>
+          </TouchableOpacity>
+        </View>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -35,13 +33,13 @@ export const Settings = () => {
         <Text style={{ color: 'white', marginLeft: 20 }}>Temperature</Text>
         <View style={styles.tempCont}>
           {useUnits().map(el => {
-            return <TempOptSettings key={`${el.value}`} el={el} />
+            return <TempOptSettings key={`${el.value}`} el={el} />;
           })}
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -72,4 +70,4 @@ const styles = StyleSheet.create({
     margin: 5,
     marginLeft: 15,
   },
-})
+});

@@ -5,25 +5,25 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { useState } from 'react'
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   getAuth,
-} from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore'
+} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 export const SignUp = () => {
-  const navigation = useNavigation()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const goToLogIn = () => {
-    navigation.goBack()
-  }
+    navigation.goBack();
+  };
 
   const createUser = async () => {
     try {
@@ -33,24 +33,24 @@ export const SignUp = () => {
             email: email,
             firstName: firstName,
             lastName: lastName,
-          })
-          getAuth().signOut()
+          });
+          getAuth().signOut();
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('That email address is already in use!')
+            Alert.alert('That email address is already in use!');
           }
 
           if (error.code === 'auth/invalid-email') {
-            Alert.alert('That email address is invalid!')
+            Alert.alert('That email address is invalid!');
           }
 
-          Alert.alert(error)
-        })
+          Alert.alert(error);
+        });
     } catch {
-      Alert.alert('Error creating user')
+      Alert.alert('Error creating user');
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -100,8 +100,8 @@ export const SignUp = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -137,4 +137,4 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
   },
-})
+});

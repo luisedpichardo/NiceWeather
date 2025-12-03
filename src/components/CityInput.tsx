@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { StyleSheet, TextInput, View } from 'react-native'
+import { useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 // Components
-import { SearchBtn } from './SearchBtn.js'
+import { SearchBtn } from './SearchBtn.js';
 
 export const CityInput = () => {
-  const [city, setCity] = useState('')
+  const [city, setCity] = useState('');
 
   return (
     <View style={styles.form}>
@@ -17,8 +17,8 @@ export const CityInput = () => {
       />
       <SearchBtn city={city} />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   form: {
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 10,
   },
-})
+});

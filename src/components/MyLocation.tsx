@@ -1,38 +1,38 @@
-import { useEffect, useState } from 'react'
-import { Alert, View } from 'react-native'
+import { useEffect, useState } from 'react';
+import { Alert, View } from 'react-native';
 // Components
-import { Loading } from './Loading.tsx'
-import { MyCityPrev } from './MyCityPrev.js'
+import { Loading } from './Loading.tsx';
+import { MyCityPrev } from './MyCityPrev.js';
 // Services
-import { getLocationService } from '../services/GetLocationService.js'
+import { getLocationService } from '../services/GetLocationService.js';
 
 type Location = {
-  accuracy: number,
-  altitude: number,
-  bearing?: number,
-  latitude: number,
-  longitude: number,
-  provider?: string,
-  speed: number,
-  time: number,
-}
+  accuracy: number;
+  altitude: number;
+  bearing?: number;
+  latitude: number;
+  longitude: number;
+  provider?: string;
+  speed: number;
+  time: number;
+};
 
 export const MyLocation = () => {
-  const [location, setLocation] = useState<Location | null>(null)
+  const [location, setLocation] = useState<Location | null>(null);
 
   useEffect(() => {
     getLocationService()
       .then(res => {
         if ('cod' in res) {
-          throw new Error(res.message)
+          throw new Error(res.message);
         } else {
-          setLocation(res)
+          setLocation(res);
         }
       })
       .catch(error => {
-        Alert.alert(error.message)
-      })
-  }, [])
+        Alert.alert(error.message);
+      });
+  }, []);
 
   return (
     <View>
@@ -44,5 +44,5 @@ export const MyLocation = () => {
         </View>
       )}
     </View>
-  )
-}
+  );
+};

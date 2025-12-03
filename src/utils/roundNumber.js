@@ -1,3 +1,3 @@
 export const roundNumber = num => {
-  return Math.round(num)
-}
+  return Math.round(num);
+};

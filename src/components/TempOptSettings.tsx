@@ -1,39 +1,39 @@
-import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // Contexts
 import {
   useUnitUpdate,
   useUnitsUpdate,
   useUnits,
-} from '../contexts/UnitContext.js'
+} from '../contexts/UnitContext.js';
 // Types
 type El = {
-  current: boolean,
-  textUI: string,
-  value: string,
-}
+  current: boolean;
+  textUI: string;
+  value: string;
+};
 type Props = {
-  el: El,
-}
+  el: El;
+};
 
-export const TempOptSettings = ({ el } : Props) => {
-  const navigation = useNavigation()
-  const setUnit = useUnitUpdate()
-  const setUnits = useUnitsUpdate()
-  const units = useUnits()
+export const TempOptSettings = ({ el }: Props) => {
+  const navigation = useNavigation();
+  const setUnit = useUnitUpdate();
+  const setUnits = useUnitsUpdate();
+  const units = useUnits();
 
   const changeUnit = () => {
-    setUnit(el.value)
+    setUnit(el.value);
     // map to give a copy updating onle the value needed
     setUnits(
-      units.map((unit : El) => ({
+      units.map((unit: El) => ({
         ...unit,
         current: unit.value === el.value,
       })),
-    )
+    );
     // navigate to main
-    navigation.goBack()
-  }
+    navigation.goBack();
+  };
 
   return (
     <TouchableOpacity style={styles.cont} onPress={() => changeUnit()}>
@@ -47,8 +47,8 @@ export const TempOptSettings = ({ el } : Props) => {
         <></>
       )}
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   cont: {
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     margin: 5,
     marginLeft: 15,
   },
-})
+});

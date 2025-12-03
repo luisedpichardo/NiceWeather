@@ -1,6 +1,6 @@
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native';
 // Components
-import { CityInput } from './CityInput.tsx'
+import { CityInput } from './CityInput.tsx';
 
 export const SearchBar = () => {
   return (
@@ -13,8 +13,8 @@ export const SearchBar = () => {
       </View>
       <CityInput />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   inputStyle: {
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
     height: 18,
     margin: 10,
   },
-})
+});

@@ -1,28 +1,28 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react';
 
-const UnitContext = createContext()
-const UnitUpdateContext = createContext()
-const UnitsContext = createContext()
-const UnistUpdateContext = createContext()
+const UnitContext = createContext();
+const UnitUpdateContext = createContext();
+const UnitsContext = createContext();
+const UnistUpdateContext = createContext();
 
 export function useUnit() {
-  return useContext(UnitContext)
+  return useContext(UnitContext);
 }
 
 export function useUnitUpdate() {
-  return useContext(UnitUpdateContext)
+  return useContext(UnitUpdateContext);
 }
 
 export function useUnits() {
-  return useContext(UnitsContext)
+  return useContext(UnitsContext);
 }
 
 export function useUnitsUpdate() {
-  return useContext(UnistUpdateContext)
+  return useContext(UnistUpdateContext);
 }
 
 export function UnitProvider({ children }) {
-  const [unit, setUnit] = useState('imperial')
+  const [unit, setUnit] = useState('imperial');
   const [units, setUnits] = useState([
     {
       textUI: 'Fahrenheit (°F)',
@@ -39,7 +39,7 @@ export function UnitProvider({ children }) {
       value: 'standard',
       current: false,
     },
-  ])
+  ]);
 
   return (
     <UnitContext.Provider value={unit}>
@@ -51,5 +51,5 @@ export function UnitProvider({ children }) {
         </UnitUpdateContext.Provider>
       </UnitsContext.Provider>
     </UnitContext.Provider>
-  )
+  );
 }

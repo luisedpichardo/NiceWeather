@@ -1,20 +1,20 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer } from 'react';
 // Reducers
-import { CityReducer } from '../reducers/CityReducer.js'
+import { CityReducer } from '../reducers/CityReducer.js';
 
-export const CitiesContext = createContext()
-const CitiesUpdateContext = createContext()
+export const CitiesContext = createContext();
+const CitiesUpdateContext = createContext();
 
 export function useCities() {
-  return useContext(CitiesContext)
+  return useContext(CitiesContext);
 }
 
 export function useCitiesUpdate() {
-  return useContext(CitiesUpdateContext)
+  return useContext(CitiesUpdateContext);
 }
 
 export function CitiesProvider({ children }) {
-  const [cities, dispatchCities] = useReducer(CityReducer, [])
+  const [cities, dispatchCities] = useReducer(CityReducer, []);
 
   return (
     <CitiesContext.Provider value={cities}>
@@ -22,5 +22,5 @@ export function CitiesProvider({ children }) {
         {children}
       </CitiesUpdateContext.Provider>
     </CitiesContext.Provider>
-  )
+  );
 }

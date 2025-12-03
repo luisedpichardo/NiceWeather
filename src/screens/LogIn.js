@@ -5,45 +5,45 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { useState } from 'react'
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import {
   signInWithEmailAndPassword,
   getAuth,
-} from '@react-native-firebase/auth'
+} from '@react-native-firebase/auth';
 
 export const LogIn = () => {
-  const navigation = useNavigation()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const goToSignUp = () => {
-    navigation.navigate('Sign Up')
-  }
+    navigation.navigate('Sign Up');
+  };
 
   const login = async () => {
     try {
       await signInWithEmailAndPassword(getAuth(), email, password)
         .then(() => {
-					// Add a notification that is logged in
-          console.log('logged in')
+          // Add a notification that is logged in
+          console.log('logged in');
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('That email address is already in use!')
+            Alert.alert('That email address is already in use!');
           }
 
           if (error.code === 'auth/invalid-email') {
-            Alert.alert('That email address is invalid!')
+            Alert.alert('That email address is invalid!');
           }
 
-          Alert.alert(error)
-        })
+          Alert.alert(error);
+        });
     } catch (e) {
-      Alert.alert('Error logging user')
+      Alert.alert('Error logging user');
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -79,8 +79,8 @@ export const LogIn = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
   },
-})
+});

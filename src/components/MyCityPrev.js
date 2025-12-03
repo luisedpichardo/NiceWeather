@@ -1,33 +1,33 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // Components
-import { WeatherIcon } from './WeatherIcon.tsx'
-import { Loading } from './Loading.tsx'
+import { WeatherIcon } from './WeatherIcon.tsx';
+import { Loading } from './Loading.tsx';
 // Contexts
-import { useUnit } from '../contexts/UnitContext.js'
+import { useUnit } from '../contexts/UnitContext.js';
 // Hooks
-import { useFetchWeatherLocPrev } from '../hooks/useFetchWeatherMyLocPrev.js'
+import { useFetchWeatherLocPrev } from '../hooks/useFetchWeatherMyLocPrev.js';
 // Screens
-import { BackgroundWeather } from '../screens/BackgroundWeather.js'
+import { BackgroundWeather } from '../screens/BackgroundWeather.js';
 // Utils
-import { roundNumber } from '../utils/roundNumber.js'
+import { roundNumber } from '../utils/roundNumber.js';
 
 export const MyCityPrev = ({ lat, long }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const { cityInfo, loader } = useFetchWeatherLocPrev(
     lat,
     long,
     'weather',
     useUnit(),
-  )
+  );
 
   const openCityScreen = () => {
     let payload = {
       cityData: cityInfo,
       myLoc: true,
-    }
-    navigation.navigate('Weather', payload)
-  }
+    };
+    navigation.navigate('Weather', payload);
+  };
 
   return (
     <View>
@@ -68,8 +68,8 @@ export const MyCityPrev = ({ lat, long }) => {
         </TouchableOpacity>
       )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   inWeather: {
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   textWhite: {
     color: 'white',
   },
-})
+});

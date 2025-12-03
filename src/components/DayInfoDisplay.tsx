@@ -1,19 +1,19 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native';
 // Utils
-import { roundNumber } from '../utils/roundNumber'
+import { roundNumber } from '../utils/roundNumber';
 // Types
 type Day = {
-  day: number,
-  max: number,
-  min: number,
-  month: number,
-  weekDay: string,
-}
+  day: number;
+  max: number;
+  min: number;
+  month: number;
+  weekDay: string;
+};
 type Props = {
-  day: Day
-}
+  day: Day;
+};
 
-export const DayInfoDisplay = ({ day } : Props) => {
+export const DayInfoDisplay = ({ day }: Props) => {
   return (
     <View style={styles.dayInfo}>
       <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{day.weekDay}</Text>
@@ -23,8 +23,8 @@ export const DayInfoDisplay = ({ day } : Props) => {
       <Text style={{ fontSize: 10 }}>Max: {roundNumber(day.max)}°</Text>
       <Text style={{ fontSize: 10 }}>Min: {roundNumber(day.min)}°</Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   dayInfo: {
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'center',
   },
-})
+});

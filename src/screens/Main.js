@@ -1,20 +1,20 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-} from 'react-native'
+} from 'react-native';
 // Components
-import { CityPreview } from '../components/CityPreview.js'
-import { MyLocation } from '../components/MyLocation.tsx'
-import { SearchBar } from '../components/SearchBar.tsx'
+import { CityPreview } from '../components/CityPreview.js';
+import { MyLocation } from '../components/MyLocation.tsx';
+import { SearchBar } from '../components/SearchBar.tsx';
 // Contexts
-import { CitiesContext } from '../contexts/CityContext.js'
+import { CitiesContext } from '../contexts/CityContext.js';
 
 class Main extends React.Component {
-  static contextType = CitiesContext
+  static contextType = CitiesContext;
 
   componentDidMount() {
     this.props.navigation.setOptions({
@@ -26,11 +26,11 @@ class Main extends React.Component {
           <Text style={{ fontSize: 16, color: 'white' }}>Settings</Text>
         </TouchableOpacity>
       ),
-    })
+    });
   }
 
   render() {
-    const citiesList = this.context
+    const citiesList = this.context;
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
@@ -39,12 +39,12 @@ class Main extends React.Component {
           <MyLocation />
           <View>
             {citiesList.map(el => {
-              return <CityPreview key={`${el.city}-${el.country}`} el={el} />
+              return <CityPreview key={`${el.city}-${el.country}`} el={el} />;
             })}
           </View>
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginBottom: 40,
   },
-})
+});
 
-export default Main
+export default Main;
