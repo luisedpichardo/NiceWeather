@@ -1,10 +1,17 @@
-import { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { useRef, useState } from 'react';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 // Components
-import { SearchBtn } from './SearchBtn.js';
+import SearchBtn from './SearchBtn.js';
 
 export const CityInput = () => {
   const [city, setCity] = useState('');
+  const searchBtnRef = useRef(null);
 
   return (
     <View style={styles.form}>
@@ -15,7 +22,15 @@ export const CityInput = () => {
         value={city}
         style={{ flex: 1 }}
       />
-      <SearchBtn city={city} />
+      <SearchBtn city={city} ref={searchBtnRef} />
+
+      <TouchableOpacity
+        title="Submit"
+        onPress={() => searchBtnRef.current?.lookCity()}
+        style={styles.btn}
+      >
+        <Text>Search</Text>
+      </TouchableOpacity>
     </View>
   );
 };

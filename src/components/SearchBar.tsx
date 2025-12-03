@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image } from 'react-native';
 // Components
-import { CityInput } from './CityInput.tsx';
+import { CityInput } from './CityInput.js';
 
 export const SearchBar = () => {
   return (

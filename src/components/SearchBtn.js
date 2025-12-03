@@ -1,4 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { useImperativeHandle, forwardRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // Contexts
 import { useCities } from '../contexts/CityContext.js';
@@ -6,7 +7,7 @@ import { useUnit } from '../contexts/UnitContext.js';
 // Services
 import { weatherService } from '../services/WeatherSercive.js';
 
-export const SearchBtn = ({ city }) => {
+const SearchBtn = ({ city }, ref) => {
   const navigation = useNavigation();
   const unit = useUnit();
   const cities = useCities();
@@ -38,20 +39,11 @@ export const SearchBtn = ({ city }) => {
       });
   };
 
-  return (
-    <TouchableOpacity
-      title="Submit"
-      onPress={() => lookCity(city)}
-      style={styles.btn}
-    >
-      <Text>Search</Text>
-    </TouchableOpacity>
-  );
+  useImperativeHandle(ref, () => ({
+    lookCity,
+  }));
+
+  return <View></View>;
 };
 
-const styles = StyleSheet.create({
-  btn: {
-    justifyContent: 'center',
-    marginRight: 10,
-  },
-});
+export default forwardRef(SearchBtn);
