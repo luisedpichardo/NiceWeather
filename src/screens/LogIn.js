@@ -38,7 +38,7 @@ export const LogIn = () => {
             Alert.alert('That email address is invalid!');
           }
 
-          Alert.alert(error);
+          Alert.alert('error', error.message);
         });
     } catch (e) {
       Alert.alert('Error logging user');

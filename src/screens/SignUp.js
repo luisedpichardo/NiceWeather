@@ -4,15 +4,10 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-} from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import { firstSignUpWithEmailAndPassword } from '../services/FirebaseService.js';
 
 export const SignUp = () => {
   const navigation = useNavigation();
@@ -25,31 +20,14 @@ export const SignUp = () => {
     navigation.goBack();
   };
 
-  const createUser = async () => {
-    try {
-      await createUserWithEmailAndPassword(getAuth(), email, password)
-        .then(() => {
-          firestore().collection('users').doc(getAuth().currentUser.email).set({
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-          });
-          getAuth().signOut();
-        })
-        .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('That email address is already in use!');
-          }
-
-          if (error.code === 'auth/invalid-email') {
-            Alert.alert('That email address is invalid!');
-          }
-
-          Alert.alert(error);
-        });
-    } catch {
-      Alert.alert('Error creating user');
-    }
+  const createUser = () => {
+    firstSignUpWithEmailAndPassword(email, password, firstName, lastName)
+      .then(() => {
+        console.log('succes');
+      })
+      .catch(err => {
+        console.log('Error: ', err);
+      });
   };
 
   return (

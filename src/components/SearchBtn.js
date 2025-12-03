@@ -1,5 +1,5 @@
 import { useImperativeHandle, forwardRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, Alert, View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // Contexts
 import { useCities } from '../contexts/CityContext.js';
