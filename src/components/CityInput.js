@@ -7,11 +7,11 @@ import {
   Text,
 } from 'react-native';
 // Components
-import SearchBtn from './SearchBtn.js';
+import LookForCity from './LookForCity.js';
 
 export const CityInput = () => {
   const [city, setCity] = useState('');
-  const searchBtnRef = useRef(null);
+  const lookForCityRef = useRef(null);
 
   return (
     <View style={styles.form}>
@@ -22,11 +22,11 @@ export const CityInput = () => {
         value={city}
         style={{ flex: 1 }}
       />
-      <SearchBtn city={city} ref={searchBtnRef} />
+      <LookForCity city={city} ref={lookForCityRef} />
 
       <TouchableOpacity
         title="Submit"
-        onPress={() => searchBtnRef.current?.lookCity()}
+        onPress={() => lookForCityRef.current?.lookCity()}
         style={styles.btn}
       >
         <Text>Search</Text>

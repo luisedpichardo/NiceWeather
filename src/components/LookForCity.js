@@ -7,7 +7,7 @@ import { useUnit } from '../contexts/UnitContext.js';
 // Services
 import { weatherService } from '../services/WeatherSercive.js';
 
-const SearchBtn = ({ city }, ref) => {
+const LookForCity = ({ city }, ref) => {
   const navigation = useNavigation();
   const unit = useUnit();
   const cities = useCities();
@@ -46,4 +46,4 @@ const SearchBtn = ({ city }, ref) => {
   return <View></View>;
 };
 
-export default forwardRef(SearchBtn);
+export default forwardRef(LookForCity);
