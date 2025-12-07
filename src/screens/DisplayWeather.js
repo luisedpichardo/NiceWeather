@@ -10,7 +10,8 @@ import { Loading } from '../components/Loading.tsx';
 import { TempDayDisplay } from '../components/TempDayDisplay.tsx';
 // Contexts
 import { useUnit } from '../contexts/UnitContext.js';
-import { useCities } from '../contexts/CityContext.js';
+// Stores
+import { storeCities } from '../store/citiesStore.tsx';
 // Screens
 import { BackgroundWeather } from './BackgroundWeather.js';
 // Services
@@ -21,7 +22,7 @@ export const DisplayWeather = ({ route }) => {
   const [loader, setLoader] = useState(true);
   const [forecastData, setForecastData] = useState(null);
   const unit = useUnit();
-  const cities = useCities();
+  const cities = storeCities.getState().cities;
 
   const getForecastByName = () => {
     weatherService(route.params.cityData.name, 'forecast', unit)
@@ -32,7 +33,7 @@ export const DisplayWeather = ({ route }) => {
           return;
         }
         // Other wise throw an error
-        throw Error(json.message);
+        throw new Error(json.message);
       })
       .catch(error => {
         Alert.alert(error.message);
@@ -43,23 +44,27 @@ export const DisplayWeather = ({ route }) => {
   useEffect(() => {
     getForecastByName();
     navigation.setOptions({
-      headerRight: () => (
-        <View>
-          {!route.params.myLoc ? (
-            <View style={styles.addRemStyle}>
-              {cities.some(elem => route.params.cityData.name === elem.city) ? (
-                <RemoveCity cityData={route.params.cityData} />
-              ) : (
-                <AddCity cityData={route.params.cityData} />
-              )}
-            </View>
-          ) : (
-            <></>
-          )}
-        </View>
-      ),
+      headerRight: () => headerRight(),
     });
   }, [navigation]);
+
+  const headerRight = () => {
+    return (
+      <View>
+        {!route.params.myLoc ? (
+          <View style={styles.addRemStyle}>
+            {cities.some(elem => route.params.cityData.name === elem.city) ? (
+              <RemoveCity cityData={route.params.cityData} />
+            ) : (
+              <AddCity cityData={route.params.cityData} />
+            )}
+          </View>
+        ) : (
+          <></>
+        )}
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>

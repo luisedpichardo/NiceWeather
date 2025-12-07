@@ -2,15 +2,16 @@ import { useImperativeHandle, forwardRef } from 'react';
 import { Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // Contexts
-import { useCities } from '../contexts/CityContext.js';
 import { useUnit } from '../contexts/UnitContext.js';
+// Stores
+import { storeCities } from '../store/citiesStore';
 // Services
 import { weatherService } from '../services/WeatherSercive.js';
 
 const LookForCity = ({ city }, ref) => {
   const navigation = useNavigation();
   const unit = useUnit();
-  const cities = useCities();
+  const cities = storeCities.getState().cities;
 
   const lookCity = () => {
     weatherService(city, 'weather', unit)
@@ -32,7 +33,7 @@ const LookForCity = ({ city }, ref) => {
           return;
         }
         // Other wise throw an error
-        throw Error(json.message);
+        throw new Error(json.message);
       })
       .catch(error => {
         Alert.alert(error.message);

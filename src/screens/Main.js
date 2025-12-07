@@ -6,16 +6,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import { connect } from 'react-redux';
 // Components
 import { CityPreview } from '../components/CityPreview.js';
 import { MyLocation } from '../components/MyLocation.tsx';
 import { SearchBar } from '../components/SearchBar.tsx';
-// Contexts
-import { CitiesContext } from '../contexts/CityContext.js';
 
 class Main extends React.Component {
-  static contextType = CitiesContext;
-
   componentDidMount() {
     this.props.navigation.setOptions({
       headerRight: () => (
@@ -30,7 +27,6 @@ class Main extends React.Component {
   }
 
   render() {
-    const citiesList = this.context;
     return (
       <View style={styles.container}>
         <Text style={styles.titleStyle}>Weather</Text>
@@ -38,7 +34,7 @@ class Main extends React.Component {
         <ScrollView style={styles.scroll}>
           <MyLocation />
           <View>
-            {citiesList.map(el => {
+            {this.props.cities.map(el => {
               return <CityPreview key={`${el.city}-${el.country}`} el={el} />;
             })}
           </View>
@@ -70,4 +66,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+const mapStateToProps = state => ({
+  cities: state.cities,
+});
+
+export default connect(mapStateToProps)(Main);

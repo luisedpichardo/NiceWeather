@@ -1,8 +1,8 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// Contexts
-import { useCitiesUpdate } from '../contexts/CityContext.js';
-import { ACTIONS } from '../reducers/CityReducer.js';
+import { useDispatch } from 'react-redux';
+// Slices
+import { onAddCity } from '../store/slice/cities/citiesSlice';
 // Types
 type Clouds = {
   all: number;
@@ -59,19 +59,14 @@ type Props = {
 
 export const AddCity = ({ cityData }: Props) => {
   const navigation = useNavigation();
-  const dispatchCities = useCitiesUpdate();
+  const dispatchCities = useDispatch();
   const addCityToList = () => {
+    // Create obj to dispatch to store
     let city = {
       city: cityData.name,
       country: cityData.sys.country,
     };
-    // Call reducer
-    dispatchCities({
-      type: ACTIONS.ADD,
-      payload: {
-        city: city,
-      },
-    });
+    dispatchCities(onAddCity(city));
     navigation.goBack();
   };
 

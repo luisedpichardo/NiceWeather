@@ -1,9 +1,8 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// Contexts
-import { useCitiesUpdate } from '../contexts/CityContext.js';
-// Reducers
-import { ACTIONS } from '../reducers/CityReducer.js';
+import { useDispatch } from 'react-redux';
+// Slices
+import { onRemoveCity } from '../store/slice/cities/citiesSlice';
 // Types
 type Clouds = {
   all: number;
@@ -60,15 +59,14 @@ type Props = {
 
 export const RemoveCity = ({ cityData }: Props) => {
   const navigation = useNavigation();
-  const dispatchCities = useCitiesUpdate();
+  const dispatchCities = useDispatch();
   const removeCityfromList = () => {
-    // Use context to call reducer
-    dispatchCities({
-      type: ACTIONS.REMOVE,
-      payload: {
+    // Dispatch action to store
+    dispatchCities(
+      onRemoveCity({
         city: cityData.name,
-      },
-    });
+      }),
+    );
     navigation.goBack();
   };
 

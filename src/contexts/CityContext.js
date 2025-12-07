@@ -1,19 +1,20 @@
+/** NOT IN USE CURRENTLY */
 import { createContext, useContext, useReducer } from 'react';
 // Reducers
 import { CityReducer } from '../reducers/CityReducer.js';
 
-export const CitiesContext = createContext();
+const CitiesContext = createContext();
 const CitiesUpdateContext = createContext();
 
-export function useCities() {
+function useCities() {
   return useContext(CitiesContext);
 }
 
-export function useCitiesUpdate() {
+function useCitiesUpdate() {
   return useContext(CitiesUpdateContext);
 }
 
-export function CitiesProvider({ children }) {
+function CitiesProvider({ children }) {
   const [cities, dispatchCities] = useReducer(CityReducer, []);
 
   return (

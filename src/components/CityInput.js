@@ -26,7 +26,10 @@ export const CityInput = () => {
 
       <TouchableOpacity
         title="Submit"
-        onPress={() => lookForCityRef.current?.lookCity()}
+        onPress={() => {
+          setCity('');
+          lookForCityRef.current?.lookCity();
+        }}
         style={styles.btn}
       >
         <Text>Search</Text>

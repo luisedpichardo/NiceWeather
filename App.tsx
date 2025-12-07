@@ -9,14 +9,15 @@ import { StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { Provider } from 'react-redux';
 // Screens
 import Main from './src/screens/Main.js';
 import { DisplayWeather } from './src/screens/DisplayWeather.js';
 import { Settings } from './src/screens/Settings.js';
+// Stores
+import { storeCities } from './src/store/citiesStore';
 // Providers
 import { UnitProvider } from './src/contexts/UnitContext.js';
-import { CitiesProvider } from './src/contexts/CityContext.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,13 +42,13 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <CitiesProvider>
+      <Provider store={storeCities}>
         <UnitProvider>
           <NavigationContainer>
             <MyStack />
           </NavigationContainer>
         </UnitProvider>
-      </CitiesProvider>
+      </Provider>
     </SafeAreaProvider>
   );
 }
