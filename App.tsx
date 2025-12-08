@@ -10,12 +10,15 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+// Components
+import { Loading } from './src/components/Loading';
 // Screens
 import Main from './src/screens/Main.js';
 import { DisplayWeather } from './src/screens/DisplayWeather.js';
 import { Settings } from './src/screens/Settings.js';
 // Stores
-import { storeCities } from './src/store/citiesStore';
+import { store, persistor } from './src/store/citiesStore';
 // Providers
 import { UnitProvider } from './src/contexts/UnitContext.js';
 
@@ -42,12 +45,14 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Provider store={storeCities}>
-        <UnitProvider>
-          <NavigationContainer>
-            <MyStack />
-          </NavigationContainer>
-        </UnitProvider>
+      <Provider store={store}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
+          <UnitProvider>
+            <NavigationContainer>
+              <MyStack />
+            </NavigationContainer>
+          </UnitProvider>
+        </PersistGate>
       </Provider>
     </SafeAreaProvider>
   );

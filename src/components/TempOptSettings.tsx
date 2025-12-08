@@ -6,6 +6,8 @@ import {
   useUnitsUpdate,
   useUnits,
 } from '../contexts/UnitContext.js';
+// Local Storage
+import { LocalStorageMMKV } from '../services/LocalStorage';
 // Types
 type El = {
   current: boolean;
@@ -22,15 +24,20 @@ export const TempOptSettings = ({ el }: Props) => {
   const setUnits = useUnitsUpdate();
   const units = useUnits();
 
-  const changeUnit = () => {
+  const { setUnitLocalStorage, setUnitsLocalStorage} = LocalStorageMMKV()
+
+  const changeUnit = async () => {
     setUnit(el.value);
     // map to give a copy updating onle the value needed
-    setUnits(
-      units.map((unit: El) => ({
-        ...unit,
-        current: unit.value === el.value,
-      })),
-    );
+    const newUnits = units.map((unit: El) => ({
+      ...unit,
+      current: unit.value === el.value,
+    }));
+    setUnits(newUnits);
+    setUnitLocalStorage({ key: 'unit', value: el.value })
+      .catch((err: any) => console.log(err));
+    setUnitsLocalStorage({ key: 'unitsOpt', value: newUnits })
+      .catch((err: any) => console.log(err));
     // navigate to main
     navigation.goBack();
   };

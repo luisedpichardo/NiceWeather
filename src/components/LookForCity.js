@@ -1,17 +1,16 @@
 import { useImperativeHandle, forwardRef } from 'react';
 import { Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 // Contexts
 import { useUnit } from '../contexts/UnitContext.js';
-// Stores
-import { storeCities } from '../store/citiesStore';
 // Services
 import { weatherService } from '../services/WeatherSercive.js';
 
 const LookForCity = ({ city }, ref) => {
   const navigation = useNavigation();
   const unit = useUnit();
-  const cities = storeCities.getState().cities;
+  const cities = useSelector(state => state.cities);
 
   const lookCity = () => {
     weatherService(city, 'weather', unit)

@@ -1,6 +1,7 @@
 import { View, StyleSheet, Alert, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 // Components
 import { TemperatureHdr } from '../components/TemperatureHdr.tsx';
 import { TempHrDisplay } from '../components/TempHrDisplay.tsx';
@@ -10,8 +11,6 @@ import { Loading } from '../components/Loading.tsx';
 import { TempDayDisplay } from '../components/TempDayDisplay.tsx';
 // Contexts
 import { useUnit } from '../contexts/UnitContext.js';
-// Stores
-import { storeCities } from '../store/citiesStore.tsx';
 // Screens
 import { BackgroundWeather } from './BackgroundWeather.js';
 // Services
@@ -22,7 +21,7 @@ export const DisplayWeather = ({ route }) => {
   const [loader, setLoader] = useState(true);
   const [forecastData, setForecastData] = useState(null);
   const unit = useUnit();
-  const cities = storeCities.getState().cities;
+  const cities = useSelector(state => state.cities);
 
   const getForecastByName = () => {
     weatherService(route.params.cityData.name, 'forecast', unit)
