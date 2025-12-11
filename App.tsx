@@ -19,8 +19,6 @@ import { DisplayWeather } from './src/screens/DisplayWeather.js';
 import { Settings } from './src/screens/Settings.js';
 // Stores
 import { store, persistor } from './src/store/citiesStore';
-// Providers
-import { UnitProvider } from './src/contexts/UnitContext.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,11 +45,9 @@ function App() {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Provider store={store}>
         <PersistGate loading={<Loading />} persistor={persistor}>
-          <UnitProvider>
-            <NavigationContainer>
-              <MyStack />
-            </NavigationContainer>
-          </UnitProvider>
+          <NavigationContainer>
+            <MyStack />
+          </NavigationContainer>
         </PersistGate>
       </Provider>
     </SafeAreaProvider>

@@ -3,21 +3,22 @@ import { useNavigation } from '@react-navigation/native';
 // Components
 import { WeatherIcon } from './WeatherIcon.tsx';
 import { Loading } from './Loading.tsx';
-// Contexts
-import { useUnit } from '../contexts/UnitContext.js';
 // Hooks
 import { useFetchWeatherPrev } from '../hooks/useFetchWeatherPrev.js';
 // Screens
 import { BackgroundWeather } from '../screens/BackgroundWeather.js';
+// Stores 
+import { unitListStore } from '../store/unitStore';
 // Utils
 import { roundNumber } from '../utils/roundNumber.js';
 
 export const CityPreview = ({ el }) => {
+  const unit = unitListStore(state => state.unit)
   const navigation = useNavigation();
   const { cityInfo, loader } = useFetchWeatherPrev(
     el.city + ',' + el.country,
     'weather',
-    useUnit(),
+    unit,
   );
 
   const openCityScreen = () => {

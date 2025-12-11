@@ -9,18 +9,18 @@ import { AddCity } from '../components/AddCity.tsx';
 import { RemoveCity } from '../components/RemoveCity.tsx';
 import { Loading } from '../components/Loading.tsx';
 import { TempDayDisplay } from '../components/TempDayDisplay.tsx';
-// Contexts
-import { useUnit } from '../contexts/UnitContext.js';
 // Screens
 import { BackgroundWeather } from './BackgroundWeather.js';
 // Services
 import { weatherService } from '../services/WeatherSercive.js';
+// Stores
+import { unitListStore } from '../store/unitStore';
 
 export const DisplayWeather = ({ route }) => {
   const navigation = useNavigation();
   const [loader, setLoader] = useState(true);
   const [forecastData, setForecastData] = useState(null);
-  const unit = useUnit();
+  const unit = unitListStore(state => state.unit)
   const cities = useSelector(state => state.cities);
 
   const getForecastByName = () => {

@@ -1,13 +1,7 @@
 import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// Contexts
-import {
-  useUnitUpdate,
-  useUnitsUpdate,
-  useUnits,
-} from '../contexts/UnitContext.js';
-// Local Storage
-import { LocalStorageMMKV } from '../services/LocalStorage';
+// Stores
+import { unitListStore } from '../store/unitStore';
 // Types
 type El = {
   current: boolean;
@@ -20,25 +14,10 @@ type Props = {
 
 export const TempOptSettings = ({ el }: Props) => {
   const navigation = useNavigation();
-  const setUnit = useUnitUpdate();
-  const setUnits = useUnitsUpdate();
-  const units = useUnits();
-
-  const { setUnitLocalStorage, setUnitsLocalStorage} = LocalStorageMMKV()
+  const setUnit = unitListStore((state:any) => state.setUnit);
 
   const changeUnit = async () => {
     setUnit(el.value);
-    // map to give a copy updating onle the value needed
-    const newUnits = units.map((unit: El) => ({
-      ...unit,
-      current: unit.value === el.value,
-    }));
-    setUnits(newUnits);
-    setUnitLocalStorage({ key: 'unit', value: el.value })
-      .catch((err: any) => console.log(err));
-    setUnitsLocalStorage({ key: 'unitsOpt', value: newUnits })
-      .catch((err: any) => console.log(err));
-    // navigate to main
     navigation.goBack();
   };
 

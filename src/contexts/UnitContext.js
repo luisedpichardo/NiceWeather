@@ -1,3 +1,4 @@
+/** NOT IN USE CURRENTLY */
 import { createContext, useContext, useState } from 'react';
 
 const UnitContext = createContext();
@@ -5,23 +6,23 @@ const UnitUpdateContext = createContext();
 const UnitsContext = createContext();
 const UnistUpdateContext = createContext();
 
-export function useUnit() {
+function useUnit() {
   return useContext(UnitContext);
 }
 
-export function useUnitUpdate() {
+function useUnitUpdate() {
   return useContext(UnitUpdateContext);
 }
 
-export function useUnits() {
+function useUnits() {
   return useContext(UnitsContext);
 }
 
-export function useUnitsUpdate() {
+function useUnitsUpdate() {
   return useContext(UnistUpdateContext);
 }
 
-export function UnitProvider({ children }) {
+function UnitProvider({ children }) {
   const [unit, setUnit] = useState('imperial');
   const [units, setUnits] = useState([
     {
