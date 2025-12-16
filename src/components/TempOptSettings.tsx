@@ -14,7 +14,7 @@ type Props = {
 
 export const TempOptSettings = ({ el }: Props) => {
   const navigation = useNavigation();
-  const setUnit = unitListStore((state:any) => state.setUnit);
+  const {setUnit, unit} = unitListStore((state:any) => state);
 
   const changeUnit = async () => {
     setUnit(el.value);
@@ -24,7 +24,7 @@ export const TempOptSettings = ({ el }: Props) => {
   return (
     <TouchableOpacity style={styles.cont} onPress={() => changeUnit()}>
       <Text style={styles.optText}>{el.textUI}</Text>
-      {el.current ? (
+      {el.value === unit ? (
         <Image
           source={require('../../assets/check.png')}
           style={{ width: 20, height: 20, marginRight: 10 }}
